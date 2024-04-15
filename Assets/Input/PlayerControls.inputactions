@@ -42,6 +42,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Dart",
+                    "type": "Button",
+                    "id": "34012236-7b45-4016-ae3f-0f9ff78b7be6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Run",
                     "type": "Value",
                     "id": "55016a9f-f4cb-4cf6-bca5-4e16f155ef80",
@@ -170,7 +179,7 @@
                 {
                     "name": "",
                     "id": "fd42b564-854f-45ce-9cbc-03fd58a81608",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -192,7 +201,7 @@
                 {
                     "name": "",
                     "id": "5cb91776-d1e9-46c1-9f8a-46d8ff5cbcb2",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -214,7 +223,7 @@
                 {
                     "name": "",
                     "id": "b3499ca4-57ab-4327-8745-edec0f3a4699",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -340,6 +349,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3197a36c-671b-4ab3-ae1b-470109090db2",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c233059-16b6-4e86-885b-90034b0eb425",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

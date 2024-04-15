@@ -12,18 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b690e8165a66e44873f49098e07215, type: 3}
   m_Name: PlayerValuesObject
   m_EditorClassIdentifier: 
+  JoystickDeadzone: 0.2
   HorizontalLookDistance: 6
   VerticalLookDistance: 4.5
   LookDampingTime: 0.5
+  DartTime: 0.25
+  GroundDartSpeedBoost: 2.5
+  GroundDartMinimumSpeed: 5
+  GroundDartMaximumSpeed: 10
+  AirDartSpeedBoost: 2.5
+  AirDartMinimumSpeed: 5
+  AirDartMaximumSpeed: 10
+  OverdriveDeceleration: 1
   GroundMovementSpeed: 5
   GroundAcceleration: 30
   GroundDeceleration: 30
   GroundRunMovementSpeed: 7.5
-  GroundRunAcceleration: 30
-  GroundRunDeceleration: 30
-  CrouchMovementSpeed: 2.5
-  CrouchAcceleration: 15
-  CrouchDeceleration: 15
+  GroundRunAcceleration: 1
+  CrouchMovementSpeed: 1
+  CrouchAcceleration: 30
+  CrouchDeceleration: 30
+  CrouchOverdriveDeceleration: 5
   SlideDeceleration: 2.5
   LiquidMovementSpeed: 2.5
   LiquidAcceleration: 7.5
@@ -31,9 +40,8 @@ MonoBehaviour:
   AirMovementSpeed: 5
   AirAcceleration: 15
   AirDeceleration: 15
-  AirRunMovementSpeed: 6.25
-  AirRunAcceleration: 3.125
-  AirRunDeceleration: 3.125
+  AirRunMovementSpeed: 7.5
+  AirRunAcceleration: 0.5
   Gravity: 20
   NegativeTerminalVelocity: 10
   PositiveVelocityHalflife: 0.5
@@ -41,17 +49,17 @@ MonoBehaviour:
   GroundDetectionSpan: 0.5
   Hangtime: 0.1
   JumpCooldown: 0.25
-  DamageJumpHeight: 1.5
-  DamageJumpTime: 0.4
+  DamageJumpHeight: 1.25
+  DamageJumpTime: 0.5
   HighJumpWindow: 0.1
-  HighJumpHeight: 3.5
+  HighJumpHeight: 3.25
   HighJumpTime: 0.5
-  SingleJumpHeight: 2.5
+  SingleJumpHeight: 2.25
   SingleJumpTime: 0.5
   DoubleJumpHeight: 2
-  DoubleJumpTime: 0.45
+  DoubleJumpTime: 0.5
   TripleJumpHeight: 1
-  TripleJumpTime: 0.35
+  TripleJumpTime: 0.375
   SlapAttackDamage: 2
   SlapAttackCost: 0
   SlapAttackTime: 0.25
@@ -66,3 +74,5 @@ MonoBehaviour:
   PounceSpeed: 7.5
   PounceJumpHeight: 1.25
   PounceJumpTime: 0.5
+  DamageFromWater: 1
+  TreatSuction: 0.1

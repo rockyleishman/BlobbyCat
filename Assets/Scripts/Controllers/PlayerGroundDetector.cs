@@ -34,6 +34,7 @@ public class PlayerGroundDetector : MonoBehaviour
             _playerStatusObject.HasHighJumpToken = true;
             _playerStatusObject.HasDoubleJumpToken = false;
             _playerStatusObject.HasTripleJumpToken = false;
+            _playerStatusObject.HasDartToken = true;
 
             //interrupt pounce attack
             if (_playerStatusObject.IsPounceAttacking)
@@ -57,6 +58,7 @@ public class PlayerGroundDetector : MonoBehaviour
                 _playerStatusObject.HasSingleJumpToken = false;
                 _playerStatusObject.HasHighJumpToken = false;
                 _playerStatusObject.HasDoubleJumpToken = true;
+                _playerStatusObject.HasDartToken = true;
             }
         }
         else if (_playerStatusObject.IsGrounded)

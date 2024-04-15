@@ -59,11 +59,11 @@ public class PlayerAttackController : MonoBehaviour
         //enable attack hitbox
         if (_playerStatusObject.IsFacingRight)
         {
-            EventManager.Instance.OnEnableRightAttackHitbox.TriggerEvent(transform.position);
+            EventManager.Instance.OnEnableRightSlapHitbox.TriggerEvent(transform.position);
         }
         else
         {
-            EventManager.Instance.OnEnableLeftAttackHitbox.TriggerEvent(transform.position);
+            EventManager.Instance.OnEnableLeftSlapHitbox.TriggerEvent(transform.position);
         }
 
         //start animation
@@ -72,8 +72,8 @@ public class PlayerAttackController : MonoBehaviour
         yield return new WaitForSeconds(_playerValuesObject.SlapAttackTime);
 
         //disable attack hitboxes
-        EventManager.Instance.OnDisableRightAttackHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnDisableLeftAttackHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableRightSlapHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableLeftSlapHitbox.TriggerEvent(transform.position);
 
         //set cooldown before next attack can be made
         _cooldownTimer = _playerValuesObject.SlapAttackCooldown;
@@ -90,8 +90,8 @@ public class PlayerAttackController : MonoBehaviour
         _playerStatusObject.IsSpinAttacking = true;
 
         //enable attack hitboxes
-        EventManager.Instance.OnEnableRightAttackHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnEnableLeftAttackHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnEnableRightSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnEnableLeftSpinHitbox.TriggerEvent(transform.position);
 
         //start animation
         _animator.SetTrigger("SpinAttack");
@@ -99,8 +99,8 @@ public class PlayerAttackController : MonoBehaviour
         yield return new WaitForSeconds(_playerValuesObject.SpinAttackTime);
 
         //disable attack hitboxes
-        EventManager.Instance.OnDisableRightAttackHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnDisableLeftAttackHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableRightSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableLeftSpinHitbox.TriggerEvent(transform.position);
 
         //set cooldown before next attack can be made
         _cooldownTimer = _playerValuesObject.SpinAttackCooldown;
@@ -119,11 +119,11 @@ public class PlayerAttackController : MonoBehaviour
         //enable attack hitbox
         if (_playerStatusObject.IsFacingRight)
         {
-            EventManager.Instance.OnEnableRightAttackHitbox.TriggerEvent(transform.position);
+            EventManager.Instance.OnEnableRightPounceHitbox.TriggerEvent(transform.position);
         }
         else
         {
-            EventManager.Instance.OnEnableLeftAttackHitbox.TriggerEvent(transform.position);
+            EventManager.Instance.OnEnableLeftPounceHitbox.TriggerEvent(transform.position);
         }
 
         //start animation
@@ -136,8 +136,12 @@ public class PlayerAttackController : MonoBehaviour
         StopAllCoroutines();
 
         //disable attack hitboxes
-        EventManager.Instance.OnDisableRightAttackHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnDisableLeftAttackHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableRightSlapHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableLeftSlapHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableRightSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableLeftSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableRightPounceHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableLeftPounceHitbox.TriggerEvent(transform.position);
 
         //end animation
         _animator.SetBool("IsPounceAttacking", false);
