@@ -6,19 +6,36 @@ using UnityEngine.Tilemaps;
 public class RuleTile2 : RuleTile
 {
     [SerializeField] public List<TileBase> BlendedTiles;
+    [SerializeField] public List<TileBlendSet> TileBlendSets;
 
     public override bool RuleMatch(int neighbor, TileBase other)
     {
         switch (neighbor)
         {
             case TilingRuleOutput.Neighbor.This:
-                return BlendedTiles.Contains(other) || base.RuleMatch(neighbor, other);
+                return DoesBlendedContainOther(other) || base.RuleMatch(neighbor, other);
 
             case TilingRuleOutput.Neighbor.NotThis:
-                return !BlendedTiles.Contains(other) && base.RuleMatch(neighbor, other);
+                return !DoesBlendedContainOther(other) && base.RuleMatch(neighbor, other);
 
             default:
                 return base.RuleMatch(neighbor, other);
         }       
+    }
+
+    private bool DoesBlendedContainOther(TileBase other)
+    {
+        bool containsOther = BlendedTiles.Contains(other);
+        if (TileBlendSets.Count > 0)
+        {
+            foreach (TileBlendSet set in TileBlendSets)
+            {
+                if (set.BlendedTiles.Contains(other))
+                {
+                    containsOther = true;
+                }
+            }
+        }
+        return containsOther;
     }
 }

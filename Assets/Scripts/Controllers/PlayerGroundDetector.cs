@@ -7,6 +7,8 @@ public class PlayerGroundDetector : MonoBehaviour
     private PlayerValues _playerValuesObject;
     private PlayerStatus _playerStatusObject;
 
+    private Rigidbody2D _rigidbody;
+
     private float _hangtimer;
     private float _groundedTimer;
 
@@ -15,6 +17,7 @@ public class PlayerGroundDetector : MonoBehaviour
         //init fields
         _playerValuesObject = DataManager.Instance.PlayerValuesObject;
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
+        _rigidbody = _playerStatusObject.Player.GetComponent<Rigidbody2D>();
         _hangtimer = 0.0f;
         _groundedTimer = 0.0f;
     }
@@ -25,7 +28,7 @@ public class PlayerGroundDetector : MonoBehaviour
         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(_playerValuesObject.GroundDetectionSpan * -0.5f, 0.0f, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
         RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerValuesObject.GroundDetectionSpan * 0.5f, 0.0f, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
 
-        if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null) && !_playerStatusObject.IsGrounded)
+        if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null) && !_playerStatusObject.IsGrounded && _rigidbody.velocity.y <= 0.0f)
         {
             //start grounded
             _playerStatusObject.IsGrounded = true;
@@ -35,6 +38,12 @@ public class PlayerGroundDetector : MonoBehaviour
             _playerStatusObject.HasDoubleJumpToken = false;
             _playerStatusObject.HasTripleJumpToken = false;
             _playerStatusObject.HasDartToken = true;
+
+            //play effect
+            if (_playerValuesObject.LandEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.LandEffect.name, transform.position, transform.rotation);
+            }
 
             //interrupt pounce attack
             if (_playerStatusObject.IsPounceAttacking)

@@ -48,7 +48,7 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float NegativeTerminalVelocity = 10.0f;
     [SerializeField] public float PositiveVelocityHalflife = 0.5f;
     [Space(10.0f)]
-    [SerializeField] public float GroundDetectionRange = 0.1f;
+    [SerializeField] public float GroundDetectionRange = 0.0625f;
     [SerializeField] public float GroundDetectionSpan = 0.5f;
     [SerializeField] public float Hangtime = 0.1f;
     [Space(10.0f)]
@@ -70,12 +70,12 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float SlapAttackTime = 0.25f;
     [SerializeField] public float SlapAttackCooldown = 0.1f;
     [Space(10.0f)]
-    [SerializeField] public float SpinAttackDamage = 1;
+    [SerializeField] public int SpinAttackDamage = 1;
     [SerializeField] public float SpinAttackCost = 0.25f;
     [SerializeField] public float SpinAttackTime = 0.5f;
     [SerializeField] public float SpinAttackCooldown = 0.1f;
     [Space(10.0f)]
-    [SerializeField] public float PounceAttackDamage = 2;
+    [SerializeField] public int PounceAttackDamage = 2;
     [SerializeField] public float PounceAttackCost = 0.25f;
     [SerializeField] public float PounceAttackCooldown = 0.1f;
     [SerializeField] public float PounceSpeed = 7.5f;
@@ -85,4 +85,15 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public int DamageFromWater = 1;
     [Space(10.0f)]
     [SerializeField] public float TreatSuction = 0.5f;
+    [Space(10.0f)]
+    [SerializeField] public Effect StepEffect;
+    [SerializeField] public Effect DartSlowEffect;
+    [SerializeField] public Effect DartFastEffect;
+    [SerializeField] public Effect DartSuperFastEffect;
+    [SerializeField] public Effect LandEffect;
+    [SerializeField] public Effect HighJumpEffect;
+    [SerializeField] public Effect SingleJumpEffect;
+    [SerializeField] public Effect DoubleJumpEffect;
+    [SerializeField] public Effect TripleJumpEffect;
+    [SerializeField] public Effect PounceJumpEffect;
 }

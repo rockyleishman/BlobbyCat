@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: -1978623151, guid: 033d06cc8a40b3242880cc400e027fbe, type: 3}
   m_DefaultGameObject: {fileID: 3709661655805363778, guid: 3f6b711f78b5f6f4ba7cc199852383bf, type: 3}
-  m_DefaultColliderType: 1
+  m_DefaultColliderType: 0
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
@@ -74,4 +74,8 @@ MonoBehaviour:
     m_NeighborPositions:
     - {x: 0, y: 1, z: 0}
     m_RuleTransform: 0
-  BlendedTiles: []
+  BlendedTiles:
+  - {fileID: 11400000, guid: b1a7f03ab86e6b54e8dbd5508e0b9c6a, type: 2}
+  - {fileID: 11400000, guid: 9c417bfcb5627054989c33ec8a26a830, type: 2}
+  - {fileID: 11400000, guid: 0c065fa4b94fef647a8c9e8470e63a33, type: 2}
+  TileBlendSets: []

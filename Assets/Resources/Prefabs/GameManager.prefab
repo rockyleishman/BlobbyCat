@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4166404007579781725}
   - component: {fileID: 3770925944232018997}
   - component: {fileID: 7919692203760207259}
+  - component: {fileID: 6109352688546666816}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce6c2c00a0b20b4c9fcca38eb599b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartingCheckpoint: {fileID: 0}
 --- !u!114 &3770925944232018997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,3 +86,15 @@ MonoBehaviour:
   OnDisableRightPounceHitbox: {fileID: 11400000, guid: 739cca3b4de83874abb0c432b984bb25, type: 2}
   OnEnableLeftPounceHitbox: {fileID: 11400000, guid: 484f4c373fb27a24282f30297a77e19f, type: 2}
   OnDisableLeftPounceHitbox: {fileID: 11400000, guid: f7efa6423123a86468a569d852d3203c, type: 2}
+--- !u!114 &6109352688546666816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291533991018468485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37817efa1e3da2d4382aed6cf71a25f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -89,8 +89,10 @@ public class Treat : Collectable
         _renderer.flipX = Random.value > 0.5f;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
+
         Player player = other.GetComponent<Player>();
 
         if (player != null)

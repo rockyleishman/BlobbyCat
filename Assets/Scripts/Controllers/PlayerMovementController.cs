@@ -11,6 +11,7 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    private ParticleSystem _particleSystem;
 
     private Vector2 _velocity;
     private Vector2 _movementInput;
@@ -36,6 +37,7 @@ public class PlayerMovementController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
         _velocity = Vector2.zero;
         _movementInput = Vector2.zero;
         _runInput = false;
@@ -356,7 +358,7 @@ public class PlayerMovementController : MonoBehaviour
         //possible jump input
         HighJump();
         SingleJump();
-        DoubleJump();
+        //DoubleJump(); //TEMPORARILY DISABLED
         //TripleJump(); //TEMPORARILY DISABLED
 
         //allow new pounce jumps if not currently pounce attacking
@@ -378,6 +380,16 @@ public class PlayerMovementController : MonoBehaviour
             _playerStatusObject.HasDoubleJumpToken = true;
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
+
+            //play effect
+            if (_playerValuesObject.SingleJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.SingleJumpEffect.name, transform.position, transform.rotation);
+            }
+            if (_playerValuesObject.HighJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.HighJumpEffect.name, transform.position, transform.rotation);
+            }
         }
 
         if (_playerStatusObject.IsHighJumping && _jumpInput && _jumpTimer < _playerValuesObject.HighJumpTime)
@@ -407,6 +419,12 @@ public class PlayerMovementController : MonoBehaviour
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
 
+            //play effect
+            if (_playerValuesObject.SingleJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.SingleJumpEffect.name, transform.position, transform.rotation);
+            }
+
             //calculate jump time and height based on horizontal speed
             if (_dartTimer > 0.0f || Mathf.Abs(_velocity.x) <= _playerValuesObject.GroundMovementSpeed)
             {
@@ -417,6 +435,12 @@ public class PlayerMovementController : MonoBehaviour
             {
                 _runningJumpHeight = _playerValuesObject.HighJumpHeight;
                 _runningJumpTime = _playerValuesObject.HighJumpTime;
+
+                //play extra effect
+                if (_playerValuesObject.HighJumpEffect != null)
+                {
+                    PoolManager.Instance.Spawn(_playerValuesObject.HighJumpEffect.name, transform.position, transform.rotation);
+                }
             }
             else
             {
@@ -453,6 +477,12 @@ public class PlayerMovementController : MonoBehaviour
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
 
+            //play effect
+            if (_playerValuesObject.DoubleJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DoubleJumpEffect.name, transform.position, transform.rotation);
+            }
+
             //interrupt pounce attack
             if (_playerStatusObject.IsPounceAttacking)
             {
@@ -487,6 +517,12 @@ public class PlayerMovementController : MonoBehaviour
             _playerStatusObject.HasTripleJumpToken = false;
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
+
+            //play effect
+            if (_playerValuesObject.TripleJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.TripleJumpEffect.name, transform.position, transform.rotation);
+            }
         }
 
         if (_playerStatusObject.IsTripleJumping && _jumpInput && _jumpTimer < _playerValuesObject.TripleJumpTime)
@@ -514,6 +550,12 @@ public class PlayerMovementController : MonoBehaviour
             _playerStatusObject.HasDoubleJumpToken = true;
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
+
+            //play effect
+            if (_playerValuesObject.PounceJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.PounceJumpEffect.name, transform.position, transform.rotation);
+            }
         }        
 
         if (_playerStatusObject.IsPounceAttacking && _jumpTimer < _playerValuesObject.PounceJumpTime)
@@ -571,6 +613,16 @@ public class PlayerMovementController : MonoBehaviour
         _animator.SetFloat("HorizontalInputScalar", Mathf.Abs(_movementInput.x));
         _animator.SetFloat("HorizontalSpeed", Mathf.Abs(_velocity.x));
 
+        //play effect for running/walking
+        if (!_particleSystem.isPlaying && _playerStatusObject.IsGrounded && Mathf.Abs(_movementInput.x) > 0.0f && Mathf.Abs(_velocity.x) > 0.0f)
+        {
+            _particleSystem.Play();
+        }
+        else
+        {
+            _particleSystem.Stop();
+        }
+
         //vertical movement
         if (_playerStatusObject.IsGrounded)
         {
@@ -588,7 +640,7 @@ public class PlayerMovementController : MonoBehaviour
         _animator.SetBool("IsCrouching", _crouchInput && _playerStatusObject.IsGrounded);
 
         //is sliding
-        _animator.SetBool("IsSliding", _runInput && _crouchInput && _playerStatusObject.IsGrounded);
+        _animator.SetBool("IsSliding", _runInput && _crouchInput && _playerStatusObject.IsGrounded);        
     }
 
     private void OnMovement(InputValue value)
@@ -694,6 +746,32 @@ public class PlayerMovementController : MonoBehaviour
 
             //update velocity
             _rigidbody.velocity = new Vector2(boostedVelocity, verticalVelocity);
+
+            //play effect
+            if (boostedVelocity >= _playerValuesObject.GroundDartMaximumSpeed && _playerValuesObject.DartSuperFastEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DartSuperFastEffect.name, transform.position, Quaternion.Euler(0.0f, 0.0f, -90.0f));
+            }
+            else if (boostedVelocity <= -_playerValuesObject.GroundDartMaximumSpeed && _playerValuesObject.DartSuperFastEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DartSuperFastEffect.name, transform.position, Quaternion.Euler(0.0f, 0.0f, 90.0f));
+            }
+            if (boostedVelocity >= _playerValuesObject.GroundRunMovementSpeed && _playerValuesObject.DartFastEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DartFastEffect.name, transform.position, Quaternion.Euler(0.0f, 0.0f, -90.0f));
+            }
+            else if (boostedVelocity <= -_playerValuesObject.GroundRunMovementSpeed && _playerValuesObject.DartFastEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DartFastEffect.name, transform.position, Quaternion.Euler(0.0f, 0.0f, 90.0f));
+            }
+            else if (boostedVelocity > 0.0f && _playerValuesObject.DartSlowEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DartSlowEffect.name, transform.position, Quaternion.Euler(0.0f, 0.0f, -90.0f));
+            }
+            else if (boostedVelocity < 0.0f && _playerValuesObject.DartSlowEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DartSlowEffect.name, transform.position, Quaternion.Euler(0.0f, 0.0f, 90.0f));
+            }
 
             _dartTimer = _playerValuesObject.DartTime;
             _playerStatusObject.HasDartToken = false;

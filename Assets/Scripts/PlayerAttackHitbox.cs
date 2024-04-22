@@ -34,27 +34,24 @@ public class PlayerAttackHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        AttackableObject attackableObject = collider.GetComponent<AttackableObject>();
+        //deal damage
+        HitPointController attackableObject = collider.GetComponent<HitPointController>();
         if (attackableObject != null)
         {
             if (_playerStatusObject.IsSlapAttacking)
             {
-                //TODO: deal damage
-                Debug.Log(attackableObject.gameObject.name + " hit with slap attack");
-                Destroy(attackableObject.gameObject);
+                attackableObject.Damage(_playerValuesObject.SlapAttackDamage);
             }
             else if (_playerStatusObject.IsSpinAttacking)
             {
-                //TODO: deal damage
-                Debug.Log(attackableObject.gameObject.name + " hit with spin attack");
-                Destroy(attackableObject.gameObject);
+                attackableObject.Damage(_playerValuesObject.SpinAttackDamage);
             }
             if (_playerStatusObject.IsPounceAttacking)
             {
-                //TODO: deal damage
-                Debug.Log(attackableObject.gameObject.name + " hit with pounce attack");
-                Destroy(attackableObject.gameObject);
+                attackableObject.Damage(_playerValuesObject.PounceAttackDamage);
             }
         }
+
+        //TODO: stun
     }
 }

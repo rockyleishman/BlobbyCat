@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c86e1bb3b78c4548a7a120062778c84, type: 3}
+  m_Name: RT2_PipeH_Bottom_SeamRight
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 1010991508, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 2
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 1010991508, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1688010672, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: 479894300, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1388098999, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: 1612094632, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1142446925, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1599431404, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: 473535241, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: 1842062655, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1664375493, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1677317809, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: 490375281, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1660319408, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -1256015139, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -329310457, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    - {fileID: -70124881, guid: c848d231bbabb8842a52cc1d17a3937f, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 2
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+  BlendedTiles: []

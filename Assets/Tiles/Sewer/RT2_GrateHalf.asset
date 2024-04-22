@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c86e1bb3b78c4548a7a120062778c84, type: 3}
   m_Name: RT2_GrateHalf
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: -507201925, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
+  m_DefaultSprite: {fileID: -1331009638, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
   m_DefaultGameObject: {fileID: 981805333992412661, guid: d7fdb8efb4314da4fa6561fd68e7d295, type: 3}
   m_DefaultColliderType: 0
   m_TilingRules:
   - m_Id: 0
     m_Sprites:
-    - {fileID: -507201925, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
+    - {fileID: -1331009638, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
     m_GameObject: {fileID: 981805333992412661, guid: d7fdb8efb4314da4fa6561fd68e7d295, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
     m_RuleTransform: 0
   - m_Id: 1
     m_Sprites:
-    - {fileID: 906590031, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
+    - {fileID: -687351068, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
     m_GameObject: {fileID: 981805333992412661, guid: d7fdb8efb4314da4fa6561fd68e7d295, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -48,7 +48,7 @@ MonoBehaviour:
     m_RuleTransform: 0
   - m_Id: 2
     m_Sprites:
-    - {fileID: 1167632768, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
+    - {fileID: -904472809, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
     m_GameObject: {fileID: 981805333992412661, guid: d7fdb8efb4314da4fa6561fd68e7d295, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -63,7 +63,7 @@ MonoBehaviour:
     m_RuleTransform: 0
   - m_Id: 3
     m_Sprites:
-    - {fileID: 518504204, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
+    - {fileID: -1961125429, guid: ea1aca56a8700444b8826465d35562d1, type: 3}
     m_GameObject: {fileID: 981805333992412661, guid: d7fdb8efb4314da4fa6561fd68e7d295, type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
@@ -77,6 +77,7 @@ MonoBehaviour:
     - {x: 1, y: 0, z: 0}
     m_RuleTransform: 0
   BlendedTiles:
+  - {fileID: 11400000, guid: 18c458b554b661b45aa01ebd1b712d89, type: 2}
   - {fileID: 11400000, guid: 00cbc2addecba6243a3df7e056f32e58, type: 2}
   - {fileID: 11400000, guid: ea9aecadfc7751f4f82cc666492b4b58, type: 2}
   - {fileID: 11400000, guid: b619bec4a06b44b46a756280288f0ffd, type: 2}
@@ -85,3 +86,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57efe1e12a6207c4897ad10451e2b646, type: 2}
   - {fileID: 11400000, guid: dc370e495e2bbfc4b9d03a0763577695, type: 2}
   - {fileID: 11400000, guid: 38f23d87a52791f408516a848eab76e4, type: 2}
+  TileBlendSets:
+  - {fileID: 11400000, guid: 012042e5aefacdd48956e6c26ba1b5f8, type: 2}
+  - {fileID: 11400000, guid: e15599d5862c77442957c266f39015e9, type: 2}

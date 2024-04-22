@@ -11,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - Ground
-  - 
+  - Collectable
   - 
   - 
   - 
@@ -40,4 +40,40 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BaseBackground
+    uniqueID: 1174171267
+    locked: 0
+  - name: Background
+    uniqueID: 3322350067
+    locked: 0
+  - name: BackEffects
+    uniqueID: 1683770131
+    locked: 0
+  - name: Midground
+    uniqueID: 2979440115
+    locked: 0
+  - name: Ground
+    uniqueID: 1320330501
+    locked: 0
+  - name: MidEffects
+    uniqueID: 3259846969
+    locked: 0
+  - name: Interactables
+    uniqueID: 3961476775
+    locked: 0
+  - name: Collectables
+    uniqueID: 583312637
+    locked: 0
+  - name: Enemies
+    uniqueID: 1486553995
+    locked: 0
+  - name: Player
+    uniqueID: 294326599
+    locked: 0
+  - name: ForeEffects
+    uniqueID: 1123918145
+    locked: 0
+  - name: Foreground
+    uniqueID: 3530204327
     locked: 0
