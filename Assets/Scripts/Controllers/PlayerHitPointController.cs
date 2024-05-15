@@ -18,6 +18,7 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
     public void RestoreHitPoints()
     {
         _playerStatusObject.CurrentHitPoints = _playerStatusObject.MaxHitPoints;
+        HUDManager.Instance.UpdateHP();
     }
 
     public void Heal(int hitPoints)
@@ -34,6 +35,8 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
             Defeat();
             return;
         }
+
+        HUDManager.Instance.UpdateHP();
 
         //animate heal
     }
@@ -53,11 +56,15 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
             return;
         }
 
+        HUDManager.Instance.UpdateHP();
+
         //animate damage
     }
 
     public void Defeat()
     {
+        HUDManager.Instance.UpdateHP();
+
         //TODO: player death
         Debug.Log("PLAYER DIED");
 
