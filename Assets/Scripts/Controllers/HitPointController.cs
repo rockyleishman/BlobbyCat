@@ -53,7 +53,7 @@ public class HitPointController : MonoBehaviour, IHitPointController
             }
 
             //i frames
-            OnInvincibility();
+            StartCoroutine(OnInvincibility());
         }        
     }
 

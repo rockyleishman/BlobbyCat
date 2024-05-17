@@ -97,6 +97,9 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float PounceJumpHeight = 1.25f;
     [SerializeField] public float PounceJumpTime = 0.5f;
     [Space(10.0f)]
+    [SerializeField] public float PostDamageInvincibilityTime = 1.0f;
+    [Space(10.0f)]
+    [SerializeField] public int DamageFromFallingBoxes = 1;
     [SerializeField] public int DamageFromWater = 1;
     [Space(10.0f)]
     [SerializeField] public float TreatSuction = 0.5f;

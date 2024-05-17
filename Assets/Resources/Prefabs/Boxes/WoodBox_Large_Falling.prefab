@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2417353744609648540}
   - component: {fileID: 5057479167329712461}
   - component: {fileID: -3639164311995911897}
+  - component: {fileID: -4108318372619150473}
   - component: {fileID: 8288212487726587856}
   m_Layer: 8
   m_Name: WoodBox_Large_Falling
@@ -175,6 +176,18 @@ MonoBehaviour:
   Gravity: 15
   TerminalVelocity: 7.5
   GroundDetectionRange: 0.0625
+--- !u!114 &-4108318372619150473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198832451923215014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79264088aa90b504bb20b7d8a1a39a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8288212487726587856
 MonoBehaviour:
   m_ObjectHideFlags: 0
