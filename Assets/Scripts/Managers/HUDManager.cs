@@ -23,7 +23,7 @@ public class HUDManager : Singleton<HUDManager>
     private bool _isTreatBarVisible;
     private bool _isTreatCountVisible;
 
-    private void Start()
+    private void Awake()
     {
         //init fields
         _playerValuesObject = DataManager.Instance.PlayerValuesObject;

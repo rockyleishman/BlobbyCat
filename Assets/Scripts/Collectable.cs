@@ -3,16 +3,38 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
+    private PlayerValues _playerValuesObject;
+    private PlayerStatus _playerStatusObject;
+    protected LevelCollectionData _levelCollectionData;
+    protected Animator _animator;
+    protected SpriteRenderer _renderer;
+
     internal bool PreviouslyCollected;
     internal bool CurrentlyCollected;
+
+    [SerializeField] public Effect CollectEffect;
 
     [SerializeField] public float FloatHeight = 0.5f;
     [SerializeField] public float FloatSpeed = 2.0f;
     private Vector2 _velocity;
+    private bool _isBeingSucked;
 
-    private void Start()
+    protected virtual void Start()
     {
+        //init fields
+        _playerValuesObject = DataManager.Instance.PlayerValuesObject;
+        _playerStatusObject = DataManager.Instance.PlayerStatusObject;
+        _levelCollectionData = DataManager.Instance.LevelCollectionDataObject;
+        _animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
         _velocity = Vector2.zero;
+        _isBeingSucked = false;        
+
+        //start in floating animation state
+        _animator.SetBool("IsFloating", true);
+
+        //randomize orientation
+        _renderer.flipX = Random.value > 0.5f;
     }
 
     public void Launch(Vector2 velocity, float gravity, float xResistance, float terminalVelocity)
@@ -64,8 +86,28 @@ public class Collectable : MonoBehaviour
         transform.position = new Vector2(transform.position.x, hit.point.y + FloatHeight);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
+    public void Suck()
     {
+        StartCoroutine(SuckCoroutine());
+    }
+
+    private IEnumerator SuckCoroutine()
+    {
+        float suctionTimer = 0.0f;
+
+        while (true)
+        {
+            suctionTimer += Time.deltaTime;
+
+            transform.position = Vector3.Lerp(transform.position, _playerStatusObject.Player.transform.position, Mathf.Clamp01(suctionTimer * _playerValuesObject.TreatSuction));
+
+            yield return null;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //check for ground
         Ground ground = other.GetComponent<Ground>();
 
         if (ground != null)
@@ -79,6 +121,12 @@ public class Collectable : MonoBehaviour
 
                 //move towards new position
                 StartCoroutine(OnGround(hit));
+
+                //keep sucking if being sucked
+                if (_isBeingSucked)
+                {
+                    StartCoroutine(SuckCoroutine());
+                }
             }
             else
             {
@@ -86,5 +134,27 @@ public class Collectable : MonoBehaviour
                 _velocity.x = -_velocity.x;
             }
         }
+
+        //check for player
+        Player player = other.GetComponent<Player>();
+
+        if (player != null)
+        {   
+            //stop physics
+            StopAllCoroutines();
+            
+            //collect
+            Collect();
+        }
+    }
+
+    protected virtual void Collect()
+    {
+        //effects
+        PoolManager.Instance.Spawn(CollectEffect.name, transform.position, transform.rotation);
+
+        //TODO: collect via manager
+        StopAllCoroutines();
+        Destroy(gameObject);
     }
 }

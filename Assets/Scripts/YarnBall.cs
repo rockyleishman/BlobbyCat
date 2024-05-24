@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class YarnBall : MonoBehaviour
 {
+    [SerializeField] public Effect CollectEffect;
     [SerializeField] public ParticleSystem ParticleSystem;
 
     [SerializeField] public float YarnLength = 30.0f;
@@ -135,6 +136,9 @@ public class YarnBall : MonoBehaviour
     }
     private void Collect()
     {
+        //effects
+        PoolManager.Instance.Spawn(CollectEffect.name, transform.position, transform.rotation);
+
         //TODO: collect via manager
         Destroy(gameObject);
     }

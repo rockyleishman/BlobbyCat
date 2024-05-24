@@ -6,4 +6,5 @@ public class DataManager : Singleton<DataManager>
 {
     [SerializeField] public PlayerValues PlayerValuesObject;
     [SerializeField] public PlayerStatus PlayerStatusObject;
+    [SerializeField] public LevelCollectionData LevelCollectionDataObject;
 }

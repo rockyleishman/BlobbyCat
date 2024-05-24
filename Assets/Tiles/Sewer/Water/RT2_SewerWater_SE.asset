@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c86e1bb3b78c4548a7a120062778c84, type: 3}
+  m_Name: RT2_SewerWater_SE
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 2026427933, guid: 2b70977617aba374783ba310118c7567, type: 3}
+  m_DefaultGameObject: {fileID: 3709661655805363778, guid: 3f6b711f78b5f6f4ba7cc199852383bf, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 2026427933, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 1396016357, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -393925760, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -505962852, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 971047006, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 1339151564, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -639062171, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 71340459, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 1823184674, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 1856783119, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -230291502, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -679510220, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 1140844659, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -405362334, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: -1968421288, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    - {fileID: 160245846, guid: 2b70977617aba374783ba310118c7567, type: 3}
+    m_GameObject: {fileID: 3709661655805363778, guid: 3f6b711f78b5f6f4ba7cc199852383bf, type: 3}
+    m_MinAnimationSpeed: 6
+    m_MaxAnimationSpeed: 6
+    m_PerlinScale: 0.5
+    m_Output: 2
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 02000000
+    m_NeighborPositions:
+    - {x: 1, y: 1, z: 0}
+    m_RuleTransform: 0
+  - m_Id: 1
+    m_Sprites:
+    - {fileID: 834429575, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 1215886087, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 1717765099, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 1939157374, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -1006664740, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -879499093, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 237129577, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 70041078, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -390464124, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -197601523, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -224139408, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -1254603803, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -1313931473, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: -1129629131, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 1943235223, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    - {fileID: 2021530614, guid: 751f75a4f2b017d43878db848a229bb5, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 6
+    m_MaxAnimationSpeed: 6
+    m_PerlinScale: 0.5
+    m_Output: 2
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 01000000
+    m_NeighborPositions:
+    - {x: 1, y: 1, z: 0}
+    m_RuleTransform: 0
+  BlendedTiles:
+  - {fileID: 11400000, guid: a054e3861deeab6479ea9b7d81392a1c, type: 2}
+  - {fileID: 11400000, guid: b1a7f03ab86e6b54e8dbd5508e0b9c6a, type: 2}
+  - {fileID: 11400000, guid: 9c417bfcb5627054989c33ec8a26a830, type: 2}
+  - {fileID: 11400000, guid: 0c065fa4b94fef647a8c9e8470e63a33, type: 2}
+  - {fileID: 11400000, guid: 7d3ffd090e7ca2643957d7edbcc23678, type: 2}
+  - {fileID: 11400000, guid: af4cdfd89f89a2142a524bf8a34bc9c7, type: 2}
+  - {fileID: 11400000, guid: 82c5b74e81fad614c837b878045e7210, type: 2}
+  TileBlendSets: []

@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Treat : Collectable
 {
-    private PlayerValues _playerValuesObject;
-    private PlayerStatus _playerStatusObject;
-
-    private Animator _animator;
-    private SpriteRenderer _renderer;
-
-    private float _suctionTimer;
-
     private const string SmallBrownAnimation = "SmallTreat_Brown_Floating";
     private const string SmallRedAnimation = "SmallTreat_Red_Floating";
     private const string SmallGreenAnimation = "SmallTreat_Green_Floating";
@@ -21,17 +13,9 @@ public class Treat : Collectable
     private const string GreenAnimation = "Treat_Green_Floating";
     private const string BlueAnimation = "Treat_Blue_Floating";
 
-    private void Start()
+    protected override void Start()
     {
-        //init fields
-        _playerValuesObject = DataManager.Instance.PlayerValuesObject;
-        _playerStatusObject = DataManager.Instance.PlayerStatusObject;
-        _suctionTimer = 0.0f;
-        _animator = GetComponent<Animator>();
-        _renderer = GetComponent<SpriteRenderer>();
-        
-        //start in floating animation state
-        _animator.SetBool("IsFloating", true);
+        base.Start();
 
         //randomize animation
         RandomizeAnimation();
@@ -84,44 +68,6 @@ public class Treat : Collectable
                     _animator.Play(BrownAnimation, -1, Random.value);
                     break;
             }
-        }
-
-        _renderer.flipX = Random.value > 0.5f;
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D other)
-    {
-        base.OnTriggerEnter2D(other);
-
-        Player player = other.GetComponent<Player>();
-
-        if (player != null)
-        {
-            Collect();
-        }
-    }
-
-    private void Collect()
-    {
-        //TODO: collect via manager
-        StopAllCoroutines();
-        Destroy(gameObject);
-    }
-
-    public void Suck()
-    {
-        StartCoroutine(SuckCoroutine());
-    }
-
-    private IEnumerator SuckCoroutine()
-    {
-        while (true)
-        {
-            _suctionTimer += Time.deltaTime;
-
-            transform.position = Vector3.Lerp(transform.position, _playerStatusObject.Player.transform.position, Mathf.Clamp01(_suctionTimer * _playerValuesObject.TreatSuction));
-
-            yield return null;
         }
     }
 }

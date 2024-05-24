@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3770925944232018997}
   - component: {fileID: 7919692203760207259}
   - component: {fileID: 6109352688546666816}
+  - component: {fileID: 7898244398403664227}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingCheckpoint: {fileID: 0}
+  LevelFadeInColour: {r: 0, g: 0, b: 0, a: 1}
+  LevelFadeInTime: 1
 --- !u!114 &3770925944232018997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerValuesObject: {fileID: 11400000, guid: 8ca2ff51a1ad3b642b357abbc8e26f1c, type: 2}
   PlayerStatusObject: {fileID: 11400000, guid: 7688b1c24856a6149a81c00cffca4863, type: 2}
+  LevelCollectionDataObject: {fileID: 11400000, guid: ae4c656dd0e5c7c498917508d5754049, type: 2}
 --- !u!114 &7919692203760207259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,5 +100,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37817efa1e3da2d4382aed6cf71a25f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7898244398403664227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291533991018468485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a80c9e0bb0c844cafe11fda16a18c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

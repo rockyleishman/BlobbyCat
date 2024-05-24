@@ -6,7 +6,18 @@ public class GameManager : Singleton<GameManager>
 {
     private PlayerStatus _playerStatusObject;
 
-    public MajorCheckpoint StartingCheckpoint;
+    [SerializeField] public MajorCheckpoint StartingCheckpoint;
+
+    [SerializeField] public Color LevelFadeColour = Color.black;
+    [SerializeField] public float LevelFadeInTime = 1.0f;
+    [SerializeField] public float DamageRespawnInTime = 0.5f;
+    [SerializeField] public float DamageRespawnFadeOutTime = 1.0f;
+    [SerializeField] public float DamageRespawnOutTime = 0.5f;
+    [SerializeField] public float DamageRespawnFadeInTime = 1.0f;
+    [SerializeField] public float DeathRespawnInTime = 0.5f;
+    [SerializeField] public float DeathRespawnFadeOutTime = 1.0f;
+    [SerializeField] public float DeathRespawnOutTime = 0.5f;
+    [SerializeField] public float DeathRespawnFadeInTime = 1.0f;
 
     private bool _isRespawning;
 
@@ -18,7 +29,13 @@ public class GameManager : Singleton<GameManager>
 
         //TODO: change when implementing persistant player data
         //reset player status object
-        ResetPlayerStatus();
+        ResetPlayerStatus();        
+    }
+
+    private void Start()
+    {
+        //fade in at start of level
+        FadeManager.Instance.FadeIn(LevelFadeColour, LevelFadeInTime);
     }
 
     private void ResetPlayerStatus()
@@ -28,8 +45,8 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.CurrentMajorCheckpoint = StartingCheckpoint;
         _playerStatusObject.CurrentMinorCheckpoint = StartingCheckpoint;
 
-        _playerStatusObject.CurrentHitPoints = 3;
-        _playerStatusObject.MaxHitPoints = 3;
+        _playerStatusObject.CurrentHitPoints = 9;
+        _playerStatusObject.MaxHitPoints = 9;
         _playerStatusObject.CurrentLives = 9;
         _playerStatusObject.MaxLives = 9;
         _playerStatusObject.CurrentSpecialPoints = 3.0f;
@@ -77,14 +94,22 @@ public class GameManager : Singleton<GameManager>
         //hide
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = false;
 
-        //respawn delay
-        yield return new WaitForSeconds(1.0f);
+        //in time
+        yield return new WaitForSeconds(DamageRespawnInTime);
 
-        //teleport to minor checkpoint
+        //fade out time
+        FadeManager.Instance.FadeOut(LevelFadeColour, DamageRespawnFadeOutTime);
+        yield return new WaitForSeconds(DamageRespawnFadeOutTime);
+
+        //teleport to minor checkpoint & zero velocity
         _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMinorCheckpoint.transform.position;
-
-        //zero velocity
         _playerStatusObject.Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        //out time
+        yield return new WaitForSeconds(DamageRespawnOutTime);
+
+        //fade in time
+        FadeManager.Instance.FadeIn(LevelFadeColour, DamageRespawnFadeInTime);
 
         //enable player
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;
@@ -115,14 +140,22 @@ public class GameManager : Singleton<GameManager>
         //hide
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = false;
 
-        //respawn delay
-        yield return new WaitForSeconds(1.0f);
+        //in time
+        yield return new WaitForSeconds(DeathRespawnInTime);
 
-        //teleport to major checkpoint
+        //fade out time
+        FadeManager.Instance.FadeOut(LevelFadeColour, DeathRespawnFadeOutTime);
+        yield return new WaitForSeconds(DeathRespawnFadeOutTime);
+
+        //teleport to major checkpoint & zero velocity
         _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMajorCheckpoint.transform.position;
-
-        //zero velocity
         _playerStatusObject.Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        //out time
+        yield return new WaitForSeconds(DeathRespawnOutTime);
+
+        //fade in time
+        FadeManager.Instance.FadeIn(LevelFadeColour, DeathRespawnFadeInTime);
 
         //enable player
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;

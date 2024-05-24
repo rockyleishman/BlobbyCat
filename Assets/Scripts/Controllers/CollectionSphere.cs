@@ -6,11 +6,11 @@ public class CollectionSphere : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Treat treat = other.GetComponent<Treat>();
+        Collectable collectable = other.GetComponent<Collectable>();
 
-        if (treat != null)
+        if (collectable != null)
         {
-            treat.Suck();
+            collectable.Suck();
         }
     }
 }

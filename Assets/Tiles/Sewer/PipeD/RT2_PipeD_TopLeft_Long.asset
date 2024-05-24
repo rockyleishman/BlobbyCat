@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c86e1bb3b78c4548a7a120062778c84, type: 3}
+  m_Name: RT2_PipeD_TopLeft_Long
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: -1731590765, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+  m_DefaultGameObject: {fileID: 114451394210924495, guid: 445ae52cceebfcd4ea86a46c34c7631c, type: 3}
+  m_DefaultColliderType: 0
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: -1731590765, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 204902052, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -264308852, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -1850170539, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 404156841, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -334930205, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -1195269874, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 1265809225, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 741354295, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 1995675816, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -1876090980, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -457527308, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -180518602, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 617105234, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: -1757666984, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    - {fileID: 1598272817, guid: 5639323dbb7ae6e41879da6705dc05eb, type: 3}
+    m_GameObject: {fileID: 114451394210924495, guid: 445ae52cceebfcd4ea86a46c34c7631c, type: 3}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+  BlendedTiles: []
+  TileBlendSets: []
