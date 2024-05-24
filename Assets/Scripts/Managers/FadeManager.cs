@@ -7,7 +7,7 @@ public class FadeManager : Singleton<FadeManager>
 {
     private Image _image;
 
-    private void Start()
+    private void Awake()
     {
         //init fields
         _image = GetComponent<Image>();
