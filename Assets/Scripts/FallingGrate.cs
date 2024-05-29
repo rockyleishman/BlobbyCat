@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FallingGrate : MonoBehaviour
 {
+    private PlayerStatus _playerStatusObject;
+
     [SerializeField] public Sprite[] RandomizedSprites;
 
     [SerializeField] public float TimeBeforeFall = 0.25f;
@@ -18,6 +20,7 @@ public class FallingGrate : MonoBehaviour
     private void Start()
     {
         //init fields
+        _playerStatusObject = DataManager.Instance.PlayerStatusObject;
         _collider = GetComponent<Collider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _isFalling = false;
@@ -26,9 +29,9 @@ public class FallingGrate : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = RandomizedSprites[Random.Range(0, RandomizedSprites.Length)];
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!_isFalling && collision.collider.GetComponent<Player>() != null)
+        if (!_isFalling && collision.collider.GetComponent<Player>() != null && _playerStatusObject.IsGrounded)
         {
             StartCoroutine(Fall());
         }

@@ -12,6 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b690e8165a66e44873f49098e07215, type: 3}
   m_Name: PlayerValuesObject
   m_EditorClassIdentifier: 
+  HUDPixelsFromTop: 4
+  HUDPixelsFromSide: 0
+  HUDPixelsInBetween: 8
+  HUD3HPLength: 60
+  HUD4HPLength: 76
+  HUD5HPLength: 92
+  HUD6HPLength: 108
+  HUD7HPLength: 124
+  HUD8HPLength: 140
+  HUD9HPLength: 156
+  HUDRevealTime: 0.25
+  HUDHideTime: 0.5
+  HUDShowHPTime: 5
+  HUDShowTreatTime: 5
   JoystickDeadzone: 0.2
   HorizontalLookDistance: 6
   VerticalLookDistance: 4.5
@@ -46,7 +60,6 @@ MonoBehaviour:
   NegativeTerminalVelocity: 10
   PositiveVelocityHalflife: 0.5
   GroundDetectionRange: 0.0625
-  GroundDetectionSpan: 0.5
   Hangtime: 0.1
   JumpCooldown: 0.25
   DamageJumpHeight: 1.25
@@ -74,6 +87,8 @@ MonoBehaviour:
   PounceSpeed: 7.5
   PounceJumpHeight: 1.25
   PounceJumpTime: 0.5
+  PostDamageInvincibilityTime: 1
+  DamageFromFallingBoxes: 1
   DamageFromWater: 1
   TreatSuction: 0.05
   StepEffect: {fileID: 0}

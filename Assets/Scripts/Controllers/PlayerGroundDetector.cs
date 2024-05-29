@@ -12,6 +12,9 @@ public class PlayerGroundDetector : MonoBehaviour
     private float _hangtimer;
     private float _groundedTimer;
 
+    private float _playerRadii;
+    private float _playerPositiveCentreOffset;
+
     private void Start()
     {
         //init fields
@@ -20,15 +23,19 @@ public class PlayerGroundDetector : MonoBehaviour
         _rigidbody = _playerStatusObject.Player.GetComponent<Rigidbody2D>();
         _hangtimer = 0.0f;
         _groundedTimer = 0.0f;
+        _playerRadii = _playerStatusObject.Player.GetComponent<CapsuleCollider2D>().size.y / 2.0f;
+        _playerPositiveCentreOffset = (_playerStatusObject.Player.GetComponent<CapsuleCollider2D>().size.y - _playerStatusObject.Player.GetComponent<CapsuleCollider2D>().size.x) / 2.0f;
     }
 
     private void Update()
     {
-        RaycastHit2D hitCentre = Physics2D.Raycast(transform.position, Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(_playerValuesObject.GroundDetectionSpan * -0.5f, 0.0f, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerValuesObject.GroundDetectionSpan * 0.5f, 0.0f, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
+        RaycastHit2D hitCentre = Physics2D.Raycast(transform.position + new Vector3(0.0f, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
+        RaycastHit2D hitLeftSlope = Physics2D.CircleCast(transform.position + new Vector3(-_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(-1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope"));
+        RaycastHit2D hitRightSlope = Physics2D.CircleCast(transform.position + new Vector3(_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope"));
 
-        if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null) && !_playerStatusObject.IsGrounded && _rigidbody.velocity.y <= 0.0f)
+        if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null || hitLeftSlope.collider != null || hitRightSlope.collider != null) && !_playerStatusObject.IsGrounded && _rigidbody.velocity.y <= 0.0f)
         {
             //start grounded
             _playerStatusObject.IsGrounded = true;
@@ -52,7 +59,7 @@ public class PlayerGroundDetector : MonoBehaviour
                 GetComponentInParent<PlayerAttackController>().InterruptAttack(_playerValuesObject.PounceAttackCooldown);
             }
         }
-        else if (hitCentre.collider == null && hitLeft.collider == null && hitRight.collider == null && _playerStatusObject.IsGrounded)
+        else if (hitCentre.collider == null && hitLeft.collider == null && hitRight.collider == null && hitLeftSlope.collider == null && hitRightSlope.collider == null && _playerStatusObject.IsGrounded)
         {
             if (_hangtimer > 0.0f)
             {

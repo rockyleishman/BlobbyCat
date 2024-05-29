@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2417353744609648540}
   - component: {fileID: 8162885252879112430}
   - component: {fileID: 4629099861646065064}
-  - component: {fileID: 528734125468616833}
+  - component: {fileID: -8195114030557176488}
   m_Layer: 8
   m_Name: CardboardBox_Long
   m_TagString: Untagged
@@ -167,7 +167,7 @@ MonoBehaviour:
   MaxYVelocity: 5
   Gravity: 10
   TerminalVelocity: 10
---- !u!114 &528734125468616833
+--- !u!114 &-8195114030557176488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,8 +176,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4198832451923215014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ffc86681dc064845b2672ea13042512, type: 3}
+  m_Script: {fileID: 11500000, guid: e676ee5111b7f9d47ba02b7ce25f5313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: -1338986484, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1022385219, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: -483114249, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
   RandomXFlip: 1
+  DamagedSprites:
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 1015069179, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: -344958245, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 1531383250, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  DamagedSpriteHealth: 0.5

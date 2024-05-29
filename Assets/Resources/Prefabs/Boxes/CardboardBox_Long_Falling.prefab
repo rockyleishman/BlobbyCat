@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2409692981249271888}
   - component: {fileID: 8162885252879112430}
   - component: {fileID: 4629099861646065064}
-  - component: {fileID: 905453866771706608}
+  - component: {fileID: 3738021532077097882}
   m_Layer: 8
   m_Name: CardboardBox_Long_Falling
   m_TagString: Untagged
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 5
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gravity: 15
   TerminalVelocity: 7.5
-  GroundDetectionRange: 0.0625
+  GroundDetectionRange: 0.001
 --- !u!114 &2409692981249271888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   MaxYVelocity: 5
   Gravity: 10
   TerminalVelocity: 10
---- !u!114 &905453866771706608
+--- !u!114 &3738021532077097882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,8 +233,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4198832451923215014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ffc86681dc064845b2672ea13042512, type: 3}
+  m_Script: {fileID: 11500000, guid: e676ee5111b7f9d47ba02b7ce25f5313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1267641105, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: -1338986484, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: 1022385219, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
+  - {fileID: -483114249, guid: f88b74a9c8353474ba517aba5b0df8c4, type: 3}
   RandomXFlip: 1
+  DamagedSprites:
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 762338751, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 1015069179, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: -344958245, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  - {fileID: 1531383250, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
+  DamagedSpriteHealth: 0.5

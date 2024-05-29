@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class SpriteRandomizer : MonoBehaviour
 {
+    protected SpriteRenderer _renderer;
+
     [SerializeField] public Sprite[] Sprites;
     [SerializeField] public bool RandomXFlip = true;
 
     private void Start()
     {
-        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        //init fields
+        _renderer = GetComponent<SpriteRenderer>();
+
+        //randomize sprite
+        RandomizeSprite();
+    }
+
+    protected virtual void RandomizeSprite()
+    {
         if (Sprites.Length > 0)
         {
-            renderer.sprite = Sprites[Random.Range(0, Sprites.Length)];
+            _renderer.sprite = Sprites[Random.Range(0, Sprites.Length)];
         }
         if (RandomXFlip && Random.value > 0.5f)
         {
-            renderer.flipX = !renderer.flipX;
+            _renderer.flipX = !_renderer.flipX;
         }
     }
 }

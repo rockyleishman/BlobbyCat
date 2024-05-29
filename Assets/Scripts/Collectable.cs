@@ -18,6 +18,7 @@ public class Collectable : MonoBehaviour
     [SerializeField] public float FloatSpeed = 2.0f;
     private Vector2 _velocity;
     private bool _isBeingSucked;
+    private bool _isFloatingUp;
 
     protected virtual void Start()
     {
@@ -28,7 +29,8 @@ public class Collectable : MonoBehaviour
         _animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
         _velocity = Vector2.zero;
-        _isBeingSucked = false;        
+        _isBeingSucked = false;
+        _isFloatingUp = false;
 
         //start in floating animation state
         _animator.SetBool("IsFloating", true);
@@ -71,6 +73,8 @@ public class Collectable : MonoBehaviour
 
     private IEnumerator OnGround(RaycastHit2D firstHit)
     {
+        _isFloatingUp = true;
+
         RaycastHit2D hit = firstHit;
 
         while (hit.distance < FloatHeight)
@@ -84,14 +88,22 @@ public class Collectable : MonoBehaviour
         }
 
         transform.position = new Vector2(transform.position.x, hit.point.y + FloatHeight);
+
+        _isFloatingUp = false;
     }
 
     public void Suck()
     {
-        StartCoroutine(SuckCoroutine());
+        if (!_isBeingSucked)
+        {
+            StopAllCoroutines();
+            _isFloatingUp = false;
+            _isBeingSucked = true;
+            StartCoroutine(OnSuck());
+        }
     }
 
-    private IEnumerator SuckCoroutine()
+    private IEnumerator OnSuck()
     {
         float suctionTimer = 0.0f;
 
@@ -116,16 +128,14 @@ public class Collectable : MonoBehaviour
 
             if (hit.collider != null)
             {
-                //stop physics
-                StopAllCoroutines();
-
-                //move towards new position
-                StartCoroutine(OnGround(hit));
-
-                //keep sucking if being sucked
-                if (_isBeingSucked)
+                //don't stop if being sucked or already floating up from ground hit
+                if (!_isBeingSucked && !_isFloatingUp)
                 {
-                    StartCoroutine(SuckCoroutine());
+                    //stop physics
+                    StopAllCoroutines();
+
+                    //move towards new position
+                    StartCoroutine(OnGround(hit));
                 }
             }
             else
@@ -139,10 +149,10 @@ public class Collectable : MonoBehaviour
         Player player = other.GetComponent<Player>();
 
         if (player != null)
-        {   
+        {
             //stop physics
             StopAllCoroutines();
-            
+
             //collect
             Collect();
         }

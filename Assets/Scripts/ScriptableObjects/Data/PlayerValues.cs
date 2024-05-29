@@ -64,7 +64,6 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float PositiveVelocityHalflife = 0.5f;
     [Space(10.0f)]
     [SerializeField] public float GroundDetectionRange = 0.0625f;
-    [SerializeField] public float GroundDetectionSpan = 0.5f;
     [SerializeField] public float Hangtime = 0.1f;
     [Space(10.0f)]
     [SerializeField] public float JumpCooldown = 0.25f;

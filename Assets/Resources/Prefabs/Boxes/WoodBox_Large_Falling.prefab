@@ -157,7 +157,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 5
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gravity: 15
   TerminalVelocity: 7.5
-  GroundDetectionRange: 0.0625
+  GroundDetectionRange: 0.001
 --- !u!114 &-4108318372619150473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,5 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffc86681dc064845b2672ea13042512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprites: []
+  Sprites:
+  - {fileID: -188473719, guid: 2a40ffd9fecb6304aa77b13298fa99c6, type: 3}
+  - {fileID: -188473719, guid: 2a40ffd9fecb6304aa77b13298fa99c6, type: 3}
+  - {fileID: -188473719, guid: 2a40ffd9fecb6304aa77b13298fa99c6, type: 3}
+  - {fileID: 1621021416, guid: 2a40ffd9fecb6304aa77b13298fa99c6, type: 3}
   RandomXFlip: 1
