@@ -70,4 +70,20 @@ public class Treat : Collectable
             }
         }
     }
+
+    protected override void Collect()
+    {
+        //effects
+        PoolManager.Instance.Spawn(CollectEffect.name, transform.position, transform.rotation);
+
+        //gain sub hit point
+        DataManager.Instance.PlayerStatusObject.Player.GetComponent<PlayerHitPointController>().GainSubHitPoint();
+
+        //update HUD
+        HUDManager.Instance.UpdateTreatCount(!PreviouslyCollected);
+
+        //TODO: collect via manager
+        StopAllCoroutines();
+        Destroy(gameObject);
+    }
 }

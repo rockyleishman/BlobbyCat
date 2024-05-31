@@ -6,4 +6,5 @@ using UnityEngine;
 public class LevelCollectionData : ScriptableObject
 {
     internal int KeysHeld;
+    internal int TreatsCollected;
 }

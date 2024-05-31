@@ -45,12 +45,9 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.CurrentMajorCheckpoint = StartingCheckpoint;
         _playerStatusObject.CurrentMinorCheckpoint = StartingCheckpoint;
 
+        _playerStatusObject.CurrentSubHitPoints = 0;
         _playerStatusObject.CurrentHitPoints = 9;
         _playerStatusObject.MaxHitPoints = 9;
-        _playerStatusObject.CurrentLives = 9;
-        _playerStatusObject.MaxLives = 9;
-        _playerStatusObject.CurrentSpecialPoints = 3.0f;
-        _playerStatusObject.MaxSpecialPoints = 3.0f;
 
         _playerStatusObject.IsFacingRight = true;
         _playerStatusObject.IsGrounded = false;

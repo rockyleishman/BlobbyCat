@@ -10,12 +10,9 @@ public class PlayerStatus : ScriptableObject
     internal MajorCheckpoint CurrentMajorCheckpoint;
     internal MinorCheckpoint CurrentMinorCheckpoint;
 
+    internal int CurrentSubHitPoints = 0;
     internal int CurrentHitPoints = 3;
     internal int MaxHitPoints = 3;
-    internal int CurrentLives = 9;
-    internal int MaxLives = 9;
-    internal float CurrentSpecialPoints = 3.0f;
-    internal float MaxSpecialPoints = 3.0f;
 
     internal bool IsFacingRight = true;
     internal bool IsGrounded = false;

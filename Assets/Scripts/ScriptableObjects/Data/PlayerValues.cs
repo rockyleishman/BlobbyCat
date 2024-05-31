@@ -7,19 +7,21 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public int HUDPixelsFromTop = 4;
     [SerializeField] public int HUDPixelsFromSide = 0;
     [SerializeField] public int HUDPixelsInBetween = 8;
-    [SerializeField] public int HUD3HPLength = 60;
-    [SerializeField] public int HUD4HPLength = 76;
-    [SerializeField] public int HUD5HPLength = 92;
-    [SerializeField] public int HUD6HPLength = 108;
-    [SerializeField] public int HUD7HPLength = 124;
-    [SerializeField] public int HUD8HPLength = 140;
-    [SerializeField] public int HUD9HPLength = 156;
-    [SerializeField] public float HUDRevealTime = 0.25f;
+    [SerializeField] public int HUD3HPLength = 64;
+    [SerializeField] public int HUD4HPLength = 80;
+    [SerializeField] public int HUD5HPLength = 96;
+    [SerializeField] public int HUD6HPLength = 112;
+    [SerializeField] public int HUD7HPLength = 128;
+    [SerializeField] public int HUD8HPLength = 144;
+    [SerializeField] public int HUD9HPLength = 160;
+    [SerializeField] public float HUDRevealTime = 0.1f;
     [SerializeField] public float HUDHideTime = 0.5f;
     [SerializeField] public float HUDShowHPTime = 5.0f;
     [SerializeField] public float HUDShowTreatTime = 5.0f;
     [Space(10.0f)]
     [SerializeField] public float JoystickDeadzone = 0.2f;
+    [Space(10.0f)]
+    [SerializeField] public int MaxSubHitPoints = 50;
     [Space(10.0f)]
     [SerializeField] public float HorizontalLookDistance = 6.0f;
     [SerializeField] public float VerticalLookDistance = 4.5f;

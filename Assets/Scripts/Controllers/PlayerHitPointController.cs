@@ -48,6 +48,8 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
             return;
         }
 
+        CheckSubHeal();
+
         //update HUD
         HUDManager.Instance.UpdateHP();
 
@@ -81,6 +83,29 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
 
             //TODO: animate damage
 
+
+            //heal if full sub hit points
+            CheckSubHeal();
+        }
+    }
+
+    public void GainSubHitPoint()
+    {
+        if (_playerStatusObject.CurrentSubHitPoints < _playerValuesObject.MaxSubHitPoints)
+        {
+            _playerStatusObject.CurrentSubHitPoints++;
+        }
+
+        CheckSubHeal();
+    }
+
+    private void CheckSubHeal()
+    {
+        if (_playerStatusObject.CurrentSubHitPoints == _playerValuesObject.MaxSubHitPoints && _playerStatusObject.CurrentHitPoints < _playerStatusObject.MaxHitPoints)
+        {
+            _playerStatusObject.CurrentSubHitPoints = 0;
+            Heal(1);
+            HUDManager.Instance.UpdateTreatCount(false);
         }
     }
 
