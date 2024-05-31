@@ -2651,7 +2651,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUDTreat_0_121
+      name: HUDTreat_Icon_Ones
       rect:
         serializedVersion: 2
         x: 256
@@ -2672,7 +2672,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUDTreat_0_125
+      name: HUDTreat_Icon_Tens
       rect:
         serializedVersion: 2
         x: 320
@@ -2693,7 +2693,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUDTreat_0_126
+      name: HUDTreat_Icon_Hundreds
       rect:
         serializedVersion: 2
         x: 384
@@ -2714,7 +2714,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUDTreat_0_127
+      name: HUDTreat_Icon_Thousands
       rect:
         serializedVersion: 2
         x: 448
@@ -2730,6 +2730,27 @@ TextureImporter:
       bones: []
       spriteID: a53fa146640d13845b72b90f1f3d8c62
       internalID: 1990915020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDTreat_Null
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0ff9fbd5a83274d952a0325a23e09b
+      internalID: 706985732
       vertices: []
       indices: 
       edges: []
@@ -2771,10 +2792,6 @@ TextureImporter:
       HUDTreat_0_119: 217730055
       HUDTreat_0_12: -419076936
       HUDTreat_0_120: -1915894805
-      HUDTreat_0_121: -1630067176
-      HUDTreat_0_125: 2034068687
-      HUDTreat_0_126: 1153578432
-      HUDTreat_0_127: 1990915020
       HUDTreat_0_13: 661254281
       HUDTreat_0_14: 1469487348
       HUDTreat_0_15: -1662526850
@@ -2870,6 +2887,11 @@ TextureImporter:
       HUDTreat_0_97: 910076169
       HUDTreat_0_98: -1292265192
       HUDTreat_0_99: 1567404682
+      HUDTreat_Icon_Hundreds: 1153578432
+      HUDTreat_Icon_Ones: -1630067176
+      HUDTreat_Icon_Tens: 2034068687
+      HUDTreat_Icon_Thousands: 1990915020
+      HUDTreat_Null: 706985732
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -5,24 +5,24 @@ using UnityEngine.UI;
 
 public class FadeManager : Singleton<FadeManager>
 {
-    private Image _image;
+    private SpriteRenderer _renderer;
 
     private void Awake()
     {
         //init fields
-        _image = GetComponent<Image>();
+        _renderer = GetComponent<SpriteRenderer>();
     }
 
     public void FlashIn()
     {
         StopAllCoroutines();
-        _image.color = Color.clear;
+        _renderer.color = Color.clear;
     }
 
     public void FlashOut(Color colour)
     {
         StopAllCoroutines();
-        _image.color = colour;
+        _renderer.color = colour;
     }
 
     public void FadeIn(Color colour, float time)
@@ -39,12 +39,12 @@ public class FadeManager : Singleton<FadeManager>
         {
             timer += Time.deltaTime;
 
-            _image.color = Color.Lerp(colour, Color.clear, timer / time);
+            _renderer.color = Color.Lerp(colour, Color.clear, timer / time);
 
             yield return null;
         }
 
-        _image.color = Color.clear;
+        _renderer.color = Color.clear;
     }
 
     public void FadeOut(Color colour, float time)
@@ -61,11 +61,11 @@ public class FadeManager : Singleton<FadeManager>
         {
             timer += Time.deltaTime;
 
-            _image.color = Color.Lerp(Color.clear, colour, timer / time);
+            _renderer.color = Color.Lerp(Color.clear, colour, timer / time);
 
             yield return null;
         }
 
-        _image.color = colour;
+        _renderer.color = colour;
     }
 }

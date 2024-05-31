@@ -8,5 +8,8 @@ public class LevelCollectionManager : Singleton<LevelCollectionManager>
     {
         //start with 0 keys
         DataManager.Instance.LevelCollectionDataObject.KeysHeld = 0;
+
+        //TODO: fix later
+        DataManager.Instance.LevelCollectionDataObject.TreatsCollected = 0;
     }
 }

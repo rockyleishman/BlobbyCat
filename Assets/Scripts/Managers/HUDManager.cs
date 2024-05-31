@@ -8,17 +8,20 @@ public class HUDManager : Singleton<HUDManager>
 {
     private PlayerValues _playerValuesObject;
     private PlayerStatus _playerStatusObject;
+    private LevelCollectionData _levelCollectionDataObject;
 
     [SerializeField] public RectTransform HPTransform;
     [SerializeField] public Animator HPAnimator;
     [SerializeField] public RectTransform TreatBarTransform;
     [SerializeField] public Animator TreatBarAnimator;
     [SerializeField] public RectTransform TreatCountTransform;
-    [SerializeField] public Animator TreatCountSymbolAnimator;
+    [SerializeField] public Animator TreatCountIconAnimator;
     [SerializeField] public Animator TreatCountThousandsAnimator;
     [SerializeField] public Animator TreatCountHundredsAnimator;
     [SerializeField] public Animator TreatCountTensAnimator;
     [SerializeField] public Animator TreatCountOnesAnimator;
+
+    private int _displayedCount;
 
     private bool _isHPVisible;
     private bool _isTreatBarVisible;
@@ -28,12 +31,15 @@ public class HUDManager : Singleton<HUDManager>
     private Coroutine _delayedHPHideCoroutine;
     private Coroutine _onUpdateTreatCountCoroutine;
     private Coroutine _delayedTreatHideCoroutine;
+    private bool _isIncreasingCount;
 
     private void Awake()
     {
         //init fields
         _playerValuesObject = DataManager.Instance.PlayerValuesObject;
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
+        _levelCollectionDataObject = DataManager.Instance.LevelCollectionDataObject;
+        _displayedCount = 0;
         _isHPVisible = false;
         _isTreatBarVisible = false;
         _isTreatCountVisible = false;
@@ -41,8 +47,10 @@ public class HUDManager : Singleton<HUDManager>
         _delayedHPHideCoroutine = null;
         _onUpdateTreatCountCoroutine = null;
         _delayedTreatHideCoroutine = null;
+        _isIncreasingCount = false;
 
-        //init animator parameters
+        //init animator parameters & show HUD at level start
+        HPAnimator.SetInteger("CurrentHP", _playerStatusObject.CurrentHitPoints);
         UpdateHP();
         UpdateTreatCount(true);
     }
@@ -257,7 +265,11 @@ public class HUDManager : Singleton<HUDManager>
         //update bar
         TreatBarAnimator.SetInteger("SubHitPoints", _playerStatusObject.CurrentSubHitPoints);
 
-        //TODO: increase count
+        //increase count if not already increasing
+        if (isLargeTreat && !_isIncreasingCount)
+        {
+            StartCoroutine(IncreaseCount());
+        }
 
         //hide after delay
         _delayedTreatHideCoroutine = StartCoroutine(DelayedTreatHide());
@@ -272,11 +284,10 @@ public class HUDManager : Singleton<HUDManager>
         {
             treatRevealTimer -= Time.deltaTime;
 
-            if (TreatBarAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Change"))
+            if (TreatBarAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Change") || _displayedCount < _levelCollectionDataObject.TreatsCollected)
             {
                 treatRevealTimer = _playerValuesObject.HUDShowTreatTime;
             }
-            //TODO: same for numbers
 
             yield return null;
         }
@@ -296,5 +307,61 @@ public class HUDManager : Singleton<HUDManager>
 
         TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, targetY);
         TreatBarTransform.anchoredPosition = new Vector2(TreatBarTransform.anchoredPosition.x, targetY);
+    }
+
+    private IEnumerator IncreaseCount()
+    {
+        _isIncreasingCount = true;
+
+        while (_displayedCount < _levelCollectionDataObject.TreatsCollected)
+        {
+            _displayedCount++;
+
+            //animate icon
+            if (_displayedCount >= 1000)
+            {
+                TreatCountIconAnimator.SetInteger("Digits", 4);
+            }
+            else if (_displayedCount >= 100)
+            {
+                TreatCountIconAnimator.SetInteger("Digits", 3);
+            }
+            else if (_displayedCount >= 10)
+            {
+                TreatCountIconAnimator.SetInteger("Digits", 2);
+            }
+            else
+            {
+                TreatCountIconAnimator.SetInteger("Digits", 1);
+            }
+
+            //animate number
+            int thousands = _displayedCount / 1000;
+            TreatCountOnesAnimator.SetInteger("Thousands", thousands);
+            TreatCountTensAnimator.SetInteger("Thousands", thousands);
+            TreatCountHundredsAnimator.SetInteger("Thousands", thousands);
+            TreatCountThousandsAnimator.SetInteger("Thousands", thousands);
+            int hundreds = _displayedCount % 1000 / 100;
+            TreatCountOnesAnimator.SetInteger("Hundreds", hundreds);
+            TreatCountTensAnimator.SetInteger("Hundreds", hundreds);
+            TreatCountHundredsAnimator.SetInteger("Hundreds", hundreds);
+            int tens = _displayedCount % 1000 % 100 / 10;
+            TreatCountOnesAnimator.SetInteger("Tens", tens);
+            TreatCountTensAnimator.SetInteger("Tens", tens);
+            int ones = _displayedCount % 1000 % 100 % 10;
+            TreatCountOnesAnimator.SetInteger("Ones", ones);
+
+            //trigger animation change
+            TreatCountIconAnimator.SetTrigger("Change");
+            TreatCountOnesAnimator.SetTrigger("Change");
+            TreatCountTensAnimator.SetTrigger("Change");
+            TreatCountHundredsAnimator.SetTrigger("Change");
+            TreatCountThousandsAnimator.SetTrigger("Change");
+
+            //wait for next change
+            yield return new WaitForSecondsRealtime(Mathf.Lerp(_playerValuesObject.SlowestCountTime, _playerValuesObject.FastestCountTime, (_levelCollectionDataObject.TreatsCollected - _displayedCount - _playerValuesObject.SlowestCountDifference) / (_playerValuesObject.FastestCountDifference - _playerValuesObject.SlowestCountDifference)));
+        }
+
+        _isIncreasingCount = false;
     }
 }

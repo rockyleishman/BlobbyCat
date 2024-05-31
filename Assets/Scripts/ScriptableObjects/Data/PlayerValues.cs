@@ -14,6 +14,10 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public int HUD7HPLength = 128;
     [SerializeField] public int HUD8HPLength = 144;
     [SerializeField] public int HUD9HPLength = 160;
+    [SerializeField] public float SlowestCountTime = 0.2f;
+    [SerializeField] public int SlowestCountDifference = 5;
+    [SerializeField] public float FastestCountTime = 0.02f;
+    [SerializeField] public int FastestCountDifference = 50;
     [SerializeField] public float HUDRevealTime = 0.1f;
     [SerializeField] public float HUDHideTime = 0.5f;
     [SerializeField] public float HUDShowHPTime = 5.0f;

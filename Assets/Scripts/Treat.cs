@@ -79,6 +79,9 @@ public class Treat : Collectable
         //gain sub hit point
         DataManager.Instance.PlayerStatusObject.Player.GetComponent<PlayerHitPointController>().GainSubHitPoint();
 
+        //add to treats collected if not already collected
+        _levelCollectionData.TreatsCollected++;
+
         //update HUD
         HUDManager.Instance.UpdateTreatCount(!PreviouslyCollected);
 
