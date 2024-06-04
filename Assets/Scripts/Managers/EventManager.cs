@@ -12,10 +12,8 @@ public class EventManager : Singleton<EventManager>
     [SerializeField] public GameEvent OnEnableLeftSlapHitbox;
     [SerializeField] public GameEvent OnDisableLeftSlapHitbox;
     [Space(10)]
-    [SerializeField] public GameEvent OnEnableRightSpinHitbox;
-    [SerializeField] public GameEvent OnDisableRightSpinHitbox;
-    [SerializeField] public GameEvent OnEnableLeftSpinHitbox;
-    [SerializeField] public GameEvent OnDisableLeftSpinHitbox;
+    [SerializeField] public GameEvent OnEnableSpinHitbox;
+    [SerializeField] public GameEvent OnDisableSpinHitbox;
     [Space(10)]
     [SerializeField] public GameEvent OnEnableRightPounceHitbox;
     [SerializeField] public GameEvent OnDisableRightPounceHitbox;

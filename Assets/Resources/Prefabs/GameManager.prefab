@@ -49,8 +49,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingCheckpoint: {fileID: 0}
-  LevelFadeInColour: {r: 0, g: 0, b: 0, a: 1}
+  LevelFadeColour: {r: 0, g: 0, b: 0, a: 1}
   LevelFadeInTime: 1
+  DamageRespawnInTime: 0.5
+  DamageRespawnFadeOutTime: 1
+  DamageRespawnOutTime: 0.5
+  DamageRespawnFadeInTime: 1
+  DeathRespawnInTime: 0.5
+  DeathRespawnFadeOutTime: 1
+  DeathRespawnOutTime: 0.5
+  DeathRespawnFadeInTime: 1
 --- !u!114 &3770925944232018997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,10 +90,8 @@ MonoBehaviour:
   OnDisableRightSlapHitbox: {fileID: 11400000, guid: aa6d37789d338b54b88787ef53cffb00, type: 2}
   OnEnableLeftSlapHitbox: {fileID: 11400000, guid: 905be78dcddcb1944ac453e6d396dbe2, type: 2}
   OnDisableLeftSlapHitbox: {fileID: 11400000, guid: 440848d9ce7e19043b9599469594d4b0, type: 2}
-  OnEnableRightSpinHitbox: {fileID: 11400000, guid: 7156e2f1547d10b44ac9929672c9f75c, type: 2}
-  OnDisableRightSpinHitbox: {fileID: 11400000, guid: 2ff9796c267b52845b1cb4a7e5ab2679, type: 2}
-  OnEnableLeftSpinHitbox: {fileID: 11400000, guid: 25ca6e9ddb028074f828be7e5952a89e, type: 2}
-  OnDisableLeftSpinHitbox: {fileID: 11400000, guid: 77af964d938f12a469a19ff9aeee2c48, type: 2}
+  OnEnableSpinHitbox: {fileID: 11400000, guid: 5e1918e24595827488986313c932967d, type: 2}
+  OnDisableSpinHitbox: {fileID: 11400000, guid: 9ae149905bedffa428a28fe4a9a9ded6, type: 2}
   OnEnableRightPounceHitbox: {fileID: 11400000, guid: b9f22487322294b48a812764d94ca7d7, type: 2}
   OnDisableRightPounceHitbox: {fileID: 11400000, guid: 739cca3b4de83874abb0c432b984bb25, type: 2}
   OnEnableLeftPounceHitbox: {fileID: 11400000, guid: 484f4c373fb27a24282f30297a77e19f, type: 2}

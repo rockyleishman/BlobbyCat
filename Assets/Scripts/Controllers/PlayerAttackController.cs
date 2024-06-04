@@ -90,8 +90,7 @@ public class PlayerAttackController : MonoBehaviour
         _playerStatusObject.IsSpinAttacking = true;
 
         //enable attack hitboxes
-        EventManager.Instance.OnEnableRightSpinHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnEnableLeftSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnEnableSpinHitbox.TriggerEvent(transform.position);
 
         //start animation
         _animator.SetTrigger("SpinAttack");
@@ -99,8 +98,7 @@ public class PlayerAttackController : MonoBehaviour
         yield return new WaitForSeconds(_playerValuesObject.SpinAttackTime);
 
         //disable attack hitboxes
-        EventManager.Instance.OnDisableRightSpinHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnDisableLeftSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableSpinHitbox.TriggerEvent(transform.position);
 
         //set cooldown before next attack can be made
         _cooldownTimer = _playerValuesObject.SpinAttackCooldown;
@@ -138,8 +136,7 @@ public class PlayerAttackController : MonoBehaviour
         //disable attack hitboxes
         EventManager.Instance.OnDisableRightSlapHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableLeftSlapHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnDisableRightSpinHitbox.TriggerEvent(transform.position);
-        EventManager.Instance.OnDisableLeftSpinHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableSpinHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableRightPounceHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableLeftPounceHitbox.TriggerEvent(transform.position);
 
