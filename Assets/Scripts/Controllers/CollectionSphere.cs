@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectionSphere : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         Collectable collectable = other.GetComponent<Collectable>();
 

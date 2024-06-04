@@ -95,7 +95,9 @@ MonoBehaviour:
   PostDamageInvincibilityTime: 1
   DamageFromFallingBoxes: 1
   DamageFromWater: 1
-  TreatSuction: 0.05
+  CollectableDelay: 0.1
+  CollectableSuction: 1
+  CollectableMaxSpeed: 20
   StepEffect: {fileID: 0}
   DartSlowEffect: {fileID: 8295572130690841561, guid: 13468c43aa59e774caaaf285fa034f16, type: 3}
   DartFastEffect: {fileID: 8295572130690841561, guid: ae7e42874104eac4886f13ff67832609, type: 3}

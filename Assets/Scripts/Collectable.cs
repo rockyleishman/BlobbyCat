@@ -18,6 +18,7 @@ public class Collectable : MonoBehaviour
     [SerializeField] public float FloatSpeed = 2.0f;
     private Vector2 _velocity;
     private bool _isBeingSucked;
+    private bool _isCollectable;
     private bool _isFloatingUp;
 
     protected virtual void Start()
@@ -30,6 +31,7 @@ public class Collectable : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _velocity = Vector2.zero;
         _isBeingSucked = false;
+        _isCollectable = true;
         _isFloatingUp = false;
 
         //start in floating animation state
@@ -41,6 +43,7 @@ public class Collectable : MonoBehaviour
 
     public void Launch(Vector2 velocity, float gravity, float xResistance, float terminalVelocity)
     {
+        StartCoroutine(OnDelayCollectablility());
         StartCoroutine(OnLaunch(velocity, gravity, xResistance, terminalVelocity));
     }
 
@@ -71,6 +74,15 @@ public class Collectable : MonoBehaviour
         }
     }
 
+    private IEnumerator OnDelayCollectablility()
+    {
+        _isCollectable = false;
+
+        yield return new WaitForSeconds(_playerValuesObject.CollectableDelay);
+
+        _isCollectable = true;
+    }
+
     private IEnumerator OnGround(RaycastHit2D firstHit)
     {
         _isFloatingUp = true;
@@ -94,7 +106,7 @@ public class Collectable : MonoBehaviour
 
     public void Suck()
     {
-        if (!_isBeingSucked)
+        if (!_isBeingSucked && _isCollectable)
         {
             StopAllCoroutines();
             _isFloatingUp = false;
@@ -107,17 +119,25 @@ public class Collectable : MonoBehaviour
     {
         float suctionTimer = 0.0f;
 
+        Vector2 velocity = _velocity;
+
         while (true)
         {
             suctionTimer += Time.deltaTime;
 
-            transform.position = Vector3.Lerp(transform.position, _playerStatusObject.Player.transform.position, Mathf.Clamp01(suctionTimer * _playerValuesObject.TreatSuction));
+            //adjust velocity
+            velocity = Vector2.Lerp(_velocity, (_playerStatusObject.Player.transform.position - transform.position).normalized * _playerValuesObject.CollectableMaxSpeed, suctionTimer * _playerValuesObject.CollectableSuction);
+
+            //transform.position = Vector3.Lerp(transform.position, _playerStatusObject.Player.transform.position, Mathf.Clamp01(suctionTimer * _playerValuesObject.CollectableSuction));
+
+            //move
+            transform.position = transform.position + new Vector3(velocity.x, velocity.y, 0.0f) * Time.deltaTime;
 
             yield return null;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         //check for ground
         Ground ground = other.GetComponent<Ground>();
@@ -129,7 +149,7 @@ public class Collectable : MonoBehaviour
             if (hit.collider != null)
             {
                 //don't stop if being sucked or already floating up from ground hit
-                if (!_isBeingSucked && !_isFloatingUp)
+                if (!_isBeingSucked && !_isFloatingUp && _isCollectable)
                 {
                     //stop physics
                     StopAllCoroutines();
@@ -148,7 +168,7 @@ public class Collectable : MonoBehaviour
         //check for player
         Player player = other.GetComponent<Player>();
 
-        if (player != null)
+        if (player != null && _isCollectable)
         {
             //stop physics
             StopAllCoroutines();

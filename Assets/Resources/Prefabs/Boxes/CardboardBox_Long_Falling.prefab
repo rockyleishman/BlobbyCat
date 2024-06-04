@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8162885252879112430}
   - component: {fileID: 4629099861646065064}
   - component: {fileID: 3738021532077097882}
+  - component: {fileID: 303539114588119334}
   m_Layer: 8
   m_Name: CardboardBox_Long_Falling
   m_TagString: Untagged
@@ -256,3 +257,15 @@ MonoBehaviour:
   - {fileID: -344958245, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
   - {fileID: 1531383250, guid: deec1f9fec021d1498f95b57934150b8, type: 3}
   DamagedSpriteHealth: 0.5
+--- !u!114 &303539114588119334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198832451923215014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d13c928c99fe848a1901e5a5ff4a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

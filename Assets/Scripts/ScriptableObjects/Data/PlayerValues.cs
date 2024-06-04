@@ -107,7 +107,9 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public int DamageFromFallingBoxes = 1;
     [SerializeField] public int DamageFromWater = 1;
     [Space(10.0f)]
-    [SerializeField] public float TreatSuction = 0.5f;
+    [SerializeField] public float CollectableDelay = 0.05f;
+    [SerializeField] public float CollectableSuction = 0.1f;
+    [SerializeField] public float CollectableMaxSpeed = 20.0f;
     [Space(10.0f)]
     [SerializeField] public Effect StepEffect;
     [SerializeField] public Effect DartSlowEffect;
