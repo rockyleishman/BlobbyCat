@@ -42,6 +42,10 @@ public class PlayerAttackHitbox : MonoBehaviour
             {
                 attackableObject.Damage(_playerValuesObject.SlapAttackDamage);
             }
+            else if (_playerStatusObject.IsSlamAttacking)
+            {
+                attackableObject.Damage(_playerValuesObject.SlamAttackDamage);
+            }
             else if (_playerStatusObject.IsSpinAttacking)
             {
                 attackableObject.Damage(_playerValuesObject.SpinAttackDamage);

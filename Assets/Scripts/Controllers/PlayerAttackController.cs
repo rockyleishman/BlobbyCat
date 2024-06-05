@@ -11,7 +11,6 @@ public class PlayerAttackController : MonoBehaviour
     private Animator _animator;
 
     private bool _crouchInput;
-    private bool _specialInput;
 
     private float _cooldownTimer;
 
@@ -22,7 +21,6 @@ public class PlayerAttackController : MonoBehaviour
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
         _animator = GetComponent<Animator>();
         _crouchInput = false;
-        _specialInput = false;
         _cooldownTimer = 0.0f;
     }
 
@@ -35,22 +33,30 @@ public class PlayerAttackController : MonoBehaviour
     {
         if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f)
         {
-            if (_crouchInput && !_specialInput && _playerStatusObject.IsGrounded)
+            if (_crouchInput && _playerStatusObject.IsGrounded)
             {
                 StartPounceAttack();
-            }
-            else if (_specialInput)
-            {
-                StartCoroutine(SpinAttackCoroutine());
             }
             else if (_playerStatusObject.IsGrounded)
             {
                 StartCoroutine(SlapAttackCoroutine());
             }
-        }        
+            else
+            {
+                StartSlamAttack();
+            }
+        }
     }
 
-    IEnumerator SlapAttackCoroutine()
+    private void OnAttack2(InputValue value)
+    {
+        if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f)
+        {
+            StartCoroutine(SpinAttackCoroutine());
+        }
+    }
+
+    private IEnumerator SlapAttackCoroutine()
     {
         //is attacking
         _playerStatusObject.IsAttacking = true;
@@ -83,7 +89,20 @@ public class PlayerAttackController : MonoBehaviour
         _playerStatusObject.IsSlapAttacking = false;
     }
 
-    IEnumerator SpinAttackCoroutine()
+    private void StartSlamAttack()
+    {
+        //is attacking
+        _playerStatusObject.IsAttacking = true;
+        _playerStatusObject.IsSlamAttacking = true;
+
+        //enable attack hitbox
+        EventManager.Instance.OnEnableSlamHitbox.TriggerEvent(transform.position);
+
+        //start animation
+        _animator.SetBool("IsSlamAttacking", true);
+    }
+
+    private IEnumerator SpinAttackCoroutine()
     {
         //is attacking
         _playerStatusObject.IsAttacking = true;
@@ -136,11 +155,13 @@ public class PlayerAttackController : MonoBehaviour
         //disable attack hitboxes
         EventManager.Instance.OnDisableRightSlapHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableLeftSlapHitbox.TriggerEvent(transform.position);
+        EventManager.Instance.OnDisableSlamHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableSpinHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableRightPounceHitbox.TriggerEvent(transform.position);
         EventManager.Instance.OnDisableLeftPounceHitbox.TriggerEvent(transform.position);
 
         //end animation
+        _animator.SetBool("IsSlamAttacking", false);
         _animator.SetBool("IsPounceAttacking", false);
 
         //set cooldown before next attack can be made
@@ -155,6 +176,7 @@ public class PlayerAttackController : MonoBehaviour
         //is not attacking
         _playerStatusObject.IsAttacking = false;
         _playerStatusObject.IsSlapAttacking = false;
+        _playerStatusObject.IsSlamAttacking = false;
         _playerStatusObject.IsSpinAttacking = false;
         _playerStatusObject.IsPounceAttacking = false;
     }
@@ -170,10 +192,5 @@ public class PlayerAttackController : MonoBehaviour
     private void OnCrouch(InputValue value)
     {
         _crouchInput = value.Get<float>() != 0.0f;
-    }
-
-    private void OnSpecial(InputValue value)
-    {
-        _specialInput = value.Get<float>() != 0.0f;
     }
 }

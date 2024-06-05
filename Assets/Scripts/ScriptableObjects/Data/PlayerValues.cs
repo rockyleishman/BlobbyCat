@@ -90,6 +90,12 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float SlapAttackTime = 0.25f;
     [SerializeField] public float SlapAttackCooldown = 0.1f;
     [Space(10.0f)]
+    [SerializeField] public int SlamAttackDamage = 2;
+    [SerializeField] public float SlamAttackCost = 0.0f;
+    [SerializeField] public float SlamAttackCooldown = 0.1f;
+    [SerializeField] public float SlamAttackGravity = 40.0f;
+    [SerializeField] public float SlamAttackNegativeTerminalVelocity = 15.0f;
+    [Space(10.0f)]
     [SerializeField] public int SpinAttackDamage = 1;
     [SerializeField] public float SpinAttackCost = 0.25f;
     [SerializeField] public float SpinAttackTime = 0.5f;

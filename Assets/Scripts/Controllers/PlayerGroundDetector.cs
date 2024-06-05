@@ -52,11 +52,16 @@ public class PlayerGroundDetector : MonoBehaviour
                 PoolManager.Instance.Spawn(_playerValuesObject.LandEffect.name, transform.position, transform.rotation);
             }
 
-            //interrupt pounce attack
+            //interrupt pounce & slam attacks
             if (_playerStatusObject.IsPounceAttacking)
             {
                 //TODO: change to event
                 GetComponentInParent<PlayerAttackController>().InterruptAttack(_playerValuesObject.PounceAttackCooldown);
+            }
+            else if (_playerStatusObject.IsSlamAttacking)
+            {
+                //TODO: change to event
+                GetComponentInParent<PlayerAttackController>().InterruptAttack(_playerValuesObject.SlamAttackCooldown);
             }
         }
         else if (hitCentre.collider == null && hitLeft.collider == null && hitRight.collider == null && hitLeftSlope.collider == null && hitRightSlope.collider == null && _playerStatusObject.IsGrounded)

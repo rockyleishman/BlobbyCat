@@ -19,6 +19,7 @@ public class PlayerStatus : ScriptableObject
 
     internal bool IsAttacking = false;
     internal bool IsSlapAttacking = false;
+    internal bool IsSlamAttacking = false;
     internal bool IsSpinAttacking = false;
     internal bool IsPounceAttacking = false;
 

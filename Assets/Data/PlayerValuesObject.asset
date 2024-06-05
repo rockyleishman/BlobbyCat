@@ -64,7 +64,7 @@ MonoBehaviour:
   Gravity: 20
   NegativeTerminalVelocity: 10
   PositiveVelocityHalflife: 0.5
-  GroundDetectionRange: 0.0625
+  GroundDetectionRange: 0.03
   Hangtime: 0.1
   JumpCooldown: 0.25
   DamageJumpHeight: 1.25
@@ -81,7 +81,12 @@ MonoBehaviour:
   SlapAttackDamage: 2
   SlapAttackCost: 0
   SlapAttackTime: 0.1
-  SlapAttackCooldown: 0.1
+  SlapAttackCooldown: 0.15
+  SlamAttackDamage: 1
+  SlamAttackCost: 0
+  SlamAttackCooldown: 0.1
+  SlamAttackGravity: 40
+  SlamAttackNegativeTerminalVelocity: 15
   SpinAttackDamage: 1
   SpinAttackCost: 0.25
   SpinAttackTime: 0.5

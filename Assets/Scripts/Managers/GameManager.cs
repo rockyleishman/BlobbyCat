@@ -54,6 +54,7 @@ public class GameManager : Singleton<GameManager>
 
         _playerStatusObject.IsAttacking = false;
         _playerStatusObject.IsSlapAttacking = false;
+        _playerStatusObject.IsSlamAttacking = false;
         _playerStatusObject.IsSpinAttacking = false;
         _playerStatusObject.IsPounceAttacking = false;
 

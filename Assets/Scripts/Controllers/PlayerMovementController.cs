@@ -18,7 +18,6 @@ public class PlayerMovementController : MonoBehaviour
 
     private bool _runInput;
     private bool _crouchInput;
-    private bool _specialInput;
     private bool _jumpInput;
 
     private float _dartTimer;
@@ -42,7 +41,6 @@ public class PlayerMovementController : MonoBehaviour
         _movementInput = Vector2.zero;
         _runInput = false;
         _crouchInput = false;
-        _specialInput = false;
         _jumpInput = false;
         _dartTimer = 0.0f;
         _jumpTimer = 0.0f;
@@ -58,7 +56,6 @@ public class PlayerMovementController : MonoBehaviour
         _movementInput = Vector2.zero;
         _runInput = false;
         _crouchInput = false;
-        _specialInput = false;
         _jumpInput = false;
     }
 
@@ -81,9 +78,12 @@ public class PlayerMovementController : MonoBehaviour
 
         //decrease dart timer
         _dartTimer -= Time.deltaTime;
-        
+
         //jump movement
-        Jump();
+        if (!_playerStatusObject.IsSlamAttacking)
+        {
+            Jump();
+        }
 
         //apply gravity
         Gravity();
@@ -581,16 +581,30 @@ public class PlayerMovementController : MonoBehaviour
                    _velocity.y -= _velocity.y / _playerValuesObject.PositiveVelocityHalflife * Time.deltaTime;
             }
 
-            //no gravity when darting and falling
+            //no gravity when darting and rising
             if (_dartTimer <= 0.0f || _velocity.y > 0.0f)
             {
                 //gravity
-                _velocity.y -= _playerValuesObject.Gravity * Time.deltaTime;
+                if (_playerStatusObject.IsSlamAttacking)
+                {
+                    _velocity.y -= _playerValuesObject.SlamAttackGravity * Time.deltaTime;
+                }
+                else
+                {
+                    _velocity.y -= _playerValuesObject.Gravity * Time.deltaTime;
+                }
             }            
         }
 
         //clamp y velocity
-        _velocity.y = Mathf.Clamp(_velocity.y, -_playerValuesObject.NegativeTerminalVelocity, Mathf.Infinity);
+        if (_playerStatusObject.IsSlamAttacking)
+        {
+            _velocity.y = Mathf.Clamp(_velocity.y, -_playerValuesObject.SlamAttackNegativeTerminalVelocity, Mathf.Infinity);
+        }
+        else
+        {
+            _velocity.y = Mathf.Clamp(_velocity.y, -_playerValuesObject.NegativeTerminalVelocity, Mathf.Infinity);
+        }        
     }
 
     private void OrientSprite()
@@ -662,11 +676,6 @@ public class PlayerMovementController : MonoBehaviour
     private void OnCrouch(InputValue value)
     {
         _crouchInput = value.Get<float>() != 0.0f;
-    }
-
-    private void OnSpecial(InputValue value)
-    {
-        _specialInput = value.Get<float>() != 0.0f;
     }
 
     private void OnJump(InputValue value)
