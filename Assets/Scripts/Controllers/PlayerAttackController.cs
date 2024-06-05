@@ -95,6 +95,9 @@ public class PlayerAttackController : MonoBehaviour
         _playerStatusObject.IsAttacking = true;
         _playerStatusObject.IsSlamAttacking = true;
 
+        //end jumps
+        _playerStatusObject.IsJumping = false;
+
         //enable attack hitbox
         EventManager.Instance.OnEnableSlamHitbox.TriggerEvent(transform.position);
 

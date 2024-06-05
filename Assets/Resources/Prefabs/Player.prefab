@@ -67,14 +67,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2865551530685470424}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Play
+          m_StringArgument: SlapLeft
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &7285018362410319505
@@ -107,14 +107,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2865551530685470424}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stop
+          m_StringArgument: SlapLeft_Null
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &4292174679569697757
@@ -633,14 +633,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8093788474400335522}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: ResetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Play
+          m_StringArgument: Slam
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &4611338695317187537
@@ -673,14 +673,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8093788474400335522}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stop
+          m_StringArgument: Slam_Null
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &5618626589948190480
@@ -768,10 +768,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1123918145
+  m_SortingLayer: 11
   m_SortingOrder: 0
-  m_Sprite: {fileID: 551219590, guid: 6c9340457a99d6f47837e6ffd3e12d61, type: 3}
+  m_Sprite: {fileID: 1369242677, guid: 8b390cc9a0b8612499b555383927d315, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1045,14 +1045,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6340643016980581424}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Play
+          m_StringArgument: Spin
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &4470377450489290558
@@ -1085,14 +1085,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6340643016980581424}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stop
+          m_StringArgument: Spin_Null
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &6768425537655030248
@@ -1634,14 +1634,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 867413263413210118}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Play
+          m_StringArgument: SlapRight
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &39592046835275547
@@ -1674,14 +1674,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 867413263413210118}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
+        m_MethodName: Play
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stop
+          m_StringArgument: SlapRight_Null
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1860078611905711321
