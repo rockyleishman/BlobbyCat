@@ -17,7 +17,6 @@ public class PlayerMovementController : MonoBehaviour
     private Vector2 _movementInput;
 
     private bool _runInput;
-    private bool _crouchInput;
     private bool _jumpInput;
 
     private float _dartTimer;
@@ -40,7 +39,6 @@ public class PlayerMovementController : MonoBehaviour
         _velocity = Vector2.zero;
         _movementInput = Vector2.zero;
         _runInput = false;
-        _crouchInput = false;
         _jumpInput = false;
         _dartTimer = 0.0f;
         _jumpTimer = 0.0f;
@@ -55,7 +53,6 @@ public class PlayerMovementController : MonoBehaviour
         //reset input
         _movementInput = Vector2.zero;
         _runInput = false;
-        _crouchInput = false;
         _jumpInput = false;
     }
 
@@ -118,7 +115,7 @@ public class PlayerMovementController : MonoBehaviour
         float gainedSpeed;
         float maximumGainedSpeed;
 
-        if (_playerStatusObject.IsGrounded && _crouchInput && _runInput)
+        if (_playerStatusObject.IsGrounded && _playerStatusObject.IsCrouching && _runInput) /////////////////////////////TODO: allow crawl movement
         {
             //slide
             //forced deceleration
@@ -139,7 +136,7 @@ public class PlayerMovementController : MonoBehaviour
 
             gainedSpeed = 0.0f;
         }
-        else if (_playerStatusObject.IsGrounded && _crouchInput)
+        else if (_playerStatusObject.IsGrounded && _playerStatusObject.IsCrouching)
         {
             //crouch
             gainedSpeed = Mathf.Abs(_movementInput.x) * _playerValuesObject.CrouchAcceleration * Time.deltaTime;
@@ -225,12 +222,12 @@ public class PlayerMovementController : MonoBehaviour
     {
         float lostSpeed;
 
-        if (_playerStatusObject.IsGrounded && _crouchInput && _runInput)
+        if (_playerStatusObject.IsGrounded && _playerStatusObject.IsCrouching && _runInput)
         {
             //slide
             lostSpeed = _playerValuesObject.SlideDeceleration * Time.deltaTime;
         }
-        else if (_playerStatusObject.IsGrounded && _crouchInput)
+        else if (_playerStatusObject.IsGrounded && _playerStatusObject.IsCrouching)
         {
             //crouch
             lostSpeed = _playerValuesObject.CrouchDeceleration * Time.deltaTime;
@@ -267,7 +264,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             float lostSpeed;
 
-            if (_playerStatusObject.IsGrounded && _crouchInput)
+            if (_playerStatusObject.IsGrounded && _playerStatusObject.IsCrouching)
             {
                 lostSpeed = _playerValuesObject.CrouchOverdriveDeceleration * Time.deltaTime;
             }
@@ -288,13 +285,13 @@ public class PlayerMovementController : MonoBehaviour
                 _velocity.x = Mathf.Clamp(_velocity.x, -_playerValuesObject.GroundRunMovementSpeed, _playerValuesObject.GroundRunMovementSpeed);
                 lostSpeed = 0.0f;
             }
-            else if (!_playerStatusObject.IsPounceAttacking && _playerStatusObject.IsGrounded && !_runInput && _crouchInput && Mathf.Abs(_velocity.x) - _playerValuesObject.CrouchMovementSpeed < lostSpeed)
+            else if (!_playerStatusObject.IsPounceAttacking && _playerStatusObject.IsGrounded && !_runInput && _playerStatusObject.IsCrouching && Mathf.Abs(_velocity.x) - _playerValuesObject.CrouchMovementSpeed < lostSpeed)
             {
                 //crouch
                 _velocity.x = Mathf.Clamp(_velocity.x, -_playerValuesObject.CrouchMovementSpeed, _playerValuesObject.CrouchMovementSpeed);
                 lostSpeed = 0.0f;
             }
-            else if (!_playerStatusObject.IsPounceAttacking && _playerStatusObject.IsGrounded && !_runInput && !_crouchInput && Mathf.Abs(_velocity.x) - _playerValuesObject.GroundMovementSpeed < lostSpeed)
+            else if (!_playerStatusObject.IsPounceAttacking && _playerStatusObject.IsGrounded && !_runInput && !_playerStatusObject.IsCrouching && Mathf.Abs(_velocity.x) - _playerValuesObject.GroundMovementSpeed < lostSpeed)
             {
                 //ground walk
                 _velocity.x = Mathf.Clamp(_velocity.x, -_playerValuesObject.GroundMovementSpeed, _playerValuesObject.GroundMovementSpeed);
@@ -651,10 +648,10 @@ public class PlayerMovementController : MonoBehaviour
         _animator.SetBool("IsGrounded", _playerStatusObject.IsGrounded);
 
         //is crouching
-        _animator.SetBool("IsCrouching", _crouchInput && _playerStatusObject.IsGrounded);
+        _animator.SetBool("IsCrouching", _playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded);
 
         //is sliding
-        _animator.SetBool("IsSliding", _runInput && _crouchInput && _playerStatusObject.IsGrounded);        
+        _animator.SetBool("IsSliding", _runInput && _playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded);        
     }
 
     private void OnMovement(InputValue value)
@@ -675,7 +672,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnCrouch(InputValue value)
     {
-        _crouchInput = value.Get<float>() != 0.0f;
+        _playerStatusObject.IsCrouching = value.Get<float>() != 0.0f;
     }
 
     private void OnJump(InputValue value)

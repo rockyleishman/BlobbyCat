@@ -50,7 +50,15 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.MaxHitPoints = 9;
 
         _playerStatusObject.IsFacingRight = true;
+
+        ResetPlayerStates();
+    }
+
+    private void ResetPlayerStates()
+    {
         _playerStatusObject.IsGrounded = false;
+
+        _playerStatusObject.IsCrouching = false;
 
         _playerStatusObject.IsAttacking = false;
         _playerStatusObject.IsSlapAttacking = false;
@@ -109,6 +117,9 @@ public class GameManager : Singleton<GameManager>
         //fade in time
         FadeManager.Instance.FadeIn(LevelFadeColour, DamageRespawnFadeInTime);
 
+        //reset player states
+        ResetPlayerStates();
+
         //enable player
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;
         _playerStatusObject.Player.gameObject.SetActive(true);
@@ -154,6 +165,9 @@ public class GameManager : Singleton<GameManager>
 
         //fade in time
         FadeManager.Instance.FadeIn(LevelFadeColour, DeathRespawnFadeInTime);
+
+        //reset player states
+        ResetPlayerStates();
 
         //enable player
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;

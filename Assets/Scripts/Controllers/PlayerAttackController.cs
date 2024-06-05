@@ -10,8 +10,6 @@ public class PlayerAttackController : MonoBehaviour
 
     private Animator _animator;
 
-    private bool _crouchInput;
-
     private float _cooldownTimer;
 
     private void Start()
@@ -20,7 +18,6 @@ public class PlayerAttackController : MonoBehaviour
         _playerValuesObject = DataManager.Instance.PlayerValuesObject;
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
         _animator = GetComponent<Animator>();
-        _crouchInput = false;
         _cooldownTimer = 0.0f;
     }
 
@@ -33,7 +30,7 @@ public class PlayerAttackController : MonoBehaviour
     {
         if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f)
         {
-            if (_crouchInput && _playerStatusObject.IsGrounded)
+            if (_playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded)
             {
                 StartPounceAttack();
             }
@@ -190,10 +187,5 @@ public class PlayerAttackController : MonoBehaviour
         {
             InterruptAttack(_playerValuesObject.PounceAttackCooldown);
         }
-    }
-
-    private void OnCrouch(InputValue value)
-    {
-        _crouchInput = value.Get<float>() != 0.0f;
     }
 }

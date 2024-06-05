@@ -17,6 +17,8 @@ public class PlayerStatus : ScriptableObject
     internal bool IsFacingRight = true;
     internal bool IsGrounded = false;
 
+    internal bool IsCrouching = false;
+
     internal bool IsAttacking = false;
     internal bool IsSlapAttacking = false;
     internal bool IsSlamAttacking = false;
