@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingCheckpoint: {fileID: 0}
+  IsHubLevel: 0
+  HasDebugMenu: 0
   LevelFadeColour: {r: 0, g: 0, b: 0, a: 1}
   LevelFadeInTime: 1
   DamageRespawnInTime: 0.5
@@ -73,6 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerValuesObject: {fileID: 11400000, guid: 8ca2ff51a1ad3b642b357abbc8e26f1c, type: 2}
   PlayerStatusObject: {fileID: 11400000, guid: 7688b1c24856a6149a81c00cffca4863, type: 2}
+  GameStatusObject: {fileID: 11400000, guid: e1e0c7d9230748f48a56646294e8ea94, type: 2}
   LevelCollectionDataObject: {fileID: 11400000, guid: ae4c656dd0e5c7c498917508d5754049, type: 2}
 --- !u!114 &7919692203760207259
 MonoBehaviour:
@@ -86,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e51a2d692c4ea41887fb4f7493f1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPause: {fileID: 11400000, guid: 780f868d89f452a4ab07adeb80726d42, type: 2}
+  OnResume: {fileID: 11400000, guid: 0ab01301ae048214882f0a064aab0780, type: 2}
   OnEnableRightSlapHitbox: {fileID: 11400000, guid: b82a5cb6ff332c4498e7fcb8aced64b0, type: 2}
   OnDisableRightSlapHitbox: {fileID: 11400000, guid: aa6d37789d338b54b88787ef53cffb00, type: 2}
   OnEnableLeftSlapHitbox: {fileID: 11400000, guid: 905be78dcddcb1944ac453e6d396dbe2, type: 2}

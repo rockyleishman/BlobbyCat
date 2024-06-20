@@ -12,6 +12,8 @@ public class PlayerAttackController : MonoBehaviour
 
     private float _cooldownTimer;
 
+    private bool _isConflictingInputEnabled;
+
     private void Start()
     {
         //init fields
@@ -19,6 +21,7 @@ public class PlayerAttackController : MonoBehaviour
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
         _animator = GetComponent<Animator>();
         _cooldownTimer = 0.0f;
+        _isConflictingInputEnabled = true;
     }
 
     private void Update()
@@ -28,7 +31,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void OnAttack()
     {
-        if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f)
+        if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f && _isConflictingInputEnabled)
         {
             if (_playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded)
             {
@@ -47,7 +50,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void OnAttack2(InputValue value)
     {
-        if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f)
+        if (!_playerStatusObject.IsAttacking && _cooldownTimer <= 0.0f && _isConflictingInputEnabled)
         {
             StartCoroutine(SpinAttackCoroutine());
         }
@@ -187,5 +190,25 @@ public class PlayerAttackController : MonoBehaviour
         {
             InterruptAttack(_playerValuesObject.PounceAttackCooldown);
         }
+    }
+
+    public void OnPause()
+    {
+        //disable conflicting inputs
+        _isConflictingInputEnabled = false;
+    }
+
+    public void OnResume()
+    {
+        StartCoroutine(OnResumeDelay());
+    }
+
+    private IEnumerator OnResumeDelay()
+    {
+        //delay
+        yield return null;
+
+        //enable inputs
+        _isConflictingInputEnabled = true;
     }
 }

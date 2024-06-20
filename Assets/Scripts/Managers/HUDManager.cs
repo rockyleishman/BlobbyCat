@@ -148,7 +148,7 @@ public class HUDManager : Singleton<HUDManager>
             {
                 HPTransform.anchoredPosition = new Vector2(HPTransform.anchoredPosition.x, HPTransform.anchoredPosition.y - 1.0f);
 
-                yield return new WaitForSeconds(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + HPTransform.rect.height));
+                yield return new WaitForSecondsRealtime(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + HPTransform.rect.height));
             }
 
             HPTransform.anchoredPosition = new Vector2(HPTransform.anchoredPosition.x, targetY);
@@ -170,7 +170,7 @@ public class HUDManager : Singleton<HUDManager>
         //wait until after changes made and delay expired
         while (hpRevealTimer > 0.0f)
         {
-            hpRevealTimer -= Time.deltaTime;
+            hpRevealTimer -= Time.unscaledDeltaTime;
 
             if (HPAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Change"))
             {
@@ -188,7 +188,7 @@ public class HUDManager : Singleton<HUDManager>
         {
             HPTransform.anchoredPosition = new Vector2(HPTransform.anchoredPosition.x, HPTransform.anchoredPosition.y + 1.0f);
 
-            yield return new WaitForSeconds(_playerValuesObject.HUDHideTime / (_playerValuesObject.HUDPixelsFromTop + HPTransform.rect.height));
+            yield return new WaitForSecondsRealtime(_playerValuesObject.HUDHideTime / (_playerValuesObject.HUDPixelsFromTop + HPTransform.rect.height));
         }
 
         HPTransform.anchoredPosition = new Vector2(HPTransform.anchoredPosition.x, targetY);
@@ -222,7 +222,7 @@ public class HUDManager : Singleton<HUDManager>
                 TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, TreatCountTransform.anchoredPosition.y - 1.0f);
                 TreatBarTransform.anchoredPosition = new Vector2(TreatBarTransform.anchoredPosition.x, TreatBarTransform.anchoredPosition.y - 1.0f);
                 
-                yield return new WaitForSeconds(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + TreatCountTransform.rect.height));
+                yield return new WaitForSecondsRealtime(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + TreatCountTransform.rect.height));
             }
 
             TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, targetY);
@@ -239,7 +239,7 @@ public class HUDManager : Singleton<HUDManager>
             {
                 TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, TreatCountTransform.anchoredPosition.y - 1.0f);
                 
-                yield return new WaitForSeconds(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + TreatCountTransform.rect.height));
+                yield return new WaitForSecondsRealtime(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + TreatCountTransform.rect.height));
             }
 
             TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, targetY);
@@ -254,7 +254,7 @@ public class HUDManager : Singleton<HUDManager>
             {
                 TreatBarTransform.anchoredPosition = new Vector2(TreatBarTransform.anchoredPosition.x, TreatBarTransform.anchoredPosition.y - 1.0f);
                 
-                yield return new WaitForSeconds(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + TreatBarTransform.rect.height));
+                yield return new WaitForSecondsRealtime(_playerValuesObject.HUDRevealTime / (_playerValuesObject.HUDPixelsFromTop + TreatBarTransform.rect.height));
             }
 
             TreatBarTransform.anchoredPosition = new Vector2(TreatBarTransform.anchoredPosition.x, targetY);
@@ -282,7 +282,7 @@ public class HUDManager : Singleton<HUDManager>
         //wait until after changes made and delay expired
         while (treatRevealTimer > 0.0f)
         {
-            treatRevealTimer -= Time.deltaTime;
+            treatRevealTimer -= Time.unscaledDeltaTime;
 
             if (TreatBarAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Change") || _displayedCount < _levelCollectionDataObject.TreatsCollected)
             {
@@ -302,7 +302,7 @@ public class HUDManager : Singleton<HUDManager>
             TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, TreatCountTransform.anchoredPosition.y + 1.0f);
             TreatBarTransform.anchoredPosition = new Vector2(TreatBarTransform.anchoredPosition.x, TreatBarTransform.anchoredPosition.y + 1.0f);
                 
-            yield return new WaitForSeconds(_playerValuesObject.HUDHideTime / (_playerValuesObject.HUDPixelsFromTop + TreatCountTransform.rect.height));
+            yield return new WaitForSecondsRealtime(_playerValuesObject.HUDHideTime / (_playerValuesObject.HUDPixelsFromTop + TreatCountTransform.rect.height));
         }
 
         TreatCountTransform.anchoredPosition = new Vector2(TreatCountTransform.anchoredPosition.x, targetY);

@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyAnimationState
+{
+    Idle1,
+    Idle2,
+    Move1,
+    Move2,
+    AttackA,
+    AttackB,
+    AttackC,
+    AttackD
+}
+
 public enum AIState
 {
     Idle,
@@ -24,13 +36,15 @@ public enum AIDetectionType
 
 public class AIController : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
-    private SpriteRenderer _renderer;
-    private Animator _animator;
-    private AIState _currentState;
+    protected Rigidbody2D _rigidbody;
+    private Collider2D _collider;
+    protected SpriteRenderer _renderer;
+    protected Animator _animator;
+    private AttackTrigger[] _attackTriggers;
+    protected AIState _currentState;
 
     [Header("Basic Settings")]
-    [SerializeField] public Collider2D MovementArea;
+    private Collider2D _movementArea;
     [SerializeField] public float MovementSpeed = 3.0f;
     [SerializeField] public float AggroSpeed = 4.0f;
     [SerializeField] public float StunRecoveryMultiplier = 1.0f;
@@ -39,12 +53,15 @@ public class AIController : MonoBehaviour
     [SerializeField] public bool StartFacingRight = true;
     [SerializeField] public WallDetector LeftWallDetector;
     [SerializeField] public WallDetector RightWallDetector;
-    [SerializeField] public float WallDetectionRange = 0.0625f;
+    [SerializeField] public LedgeDetector LeftLedgeDetector;
+    [SerializeField] public LedgeDetector RightLedgeDetector;
+    [SerializeField] public float DetectionRange = 0.0625f;
+    [SerializeField] public bool CollidesWithPlayer = true;
+    [SerializeField] public bool CollidesWithEnemies = true;
 
     [Header("Player Detection")]
     [SerializeField] public bool IsPassive = false;
     [SerializeField] public AIDetectionType DetectionType;
-    [SerializeField] public Collider2D SightCollider;
     [SerializeField] public float SightDetectionRange = 8.0f;
     [SerializeField] public float AudioDetectionRange = 4.0f;
 
@@ -67,14 +84,27 @@ public class AIController : MonoBehaviour
     {
         //init fields
         _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<Collider2D>();
         _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _attackTriggers = GetComponentsInChildren<AttackTrigger>();
         _currentState = AIState.Idle;
         _stunTime = 0.0f;
         _renderer.flipX = !StartFacingRight;
         _roamSpeed = MovementSpeed;
         _roamTimer = 0.0f;
         _patrolIndex = 0;
+
+        if (transform.parent != null)
+        {
+            _movementArea = transform.parent.GetComponent<Collider2D>();
+        }
+
+        //enable collision with player
+        if (CollidesWithPlayer)
+        {
+            GetComponent<Collider2D>().forceSendLayers = LayerMask.GetMask("Player");
+        }
 
         //set initial state
         SetState(AIState.Idle);
@@ -135,11 +165,11 @@ public class AIController : MonoBehaviour
         //animate
         if (Random.value >= 0.5f)
         {
-            _animator.SetTrigger("Idle1");
+            _animator.SetInteger("State", (int)EnemyAnimationState.Idle1);
         }
         else
         {
-            _animator.SetTrigger("Idle2");
+            _animator.SetInteger("State", (int)EnemyAnimationState.Idle2);
         }
 
         //idle
@@ -173,11 +203,26 @@ public class AIController : MonoBehaviour
     private IEnumerator OnStunned()
     {
         //animate
-        _animator.SetTrigger("Stun");
+        _animator.SetBool("Hurt", true);
+
+        //disable attached attack triggers
+        foreach (AttackTrigger attackTrigger in _attackTriggers)
+        {
+            attackTrigger.gameObject.SetActive(false);
+        }
 
         //stun idle
         _rigidbody.velocity = Vector2.zero;
         yield return new WaitForSeconds(_stunTime);
+
+        //enable attached attack triggers
+        foreach (AttackTrigger attackTrigger in _attackTriggers)
+        {
+            attackTrigger.gameObject.SetActive(true);
+        }
+
+        //end animation
+        _animator.SetBool("Hurt", false);
 
         if (DetectionType == AIDetectionType.Roaming)
         {
@@ -194,7 +239,7 @@ public class AIController : MonoBehaviour
     private IEnumerator OnRoam()
     {
         //animate
-        _animator.SetTrigger("Run");
+        _animator.SetInteger("State", (int)EnemyAnimationState.Move1);
 
         //set roam timer, speed, and direction
         _roamTimer = Random.Range(MinRoamTime, MaxRoamTime);
@@ -210,10 +255,17 @@ public class AIController : MonoBehaviour
             //decrement roam timer
             _roamTimer -= Time.deltaTime;
 
-            //check for walls
-            if (WallCheck())
+            //check for walls & ledges
+            if (WallCheck() || LedgeCheck())
             {
                 _renderer.flipX = !_renderer.flipX;
+            }
+
+            //check for player in path
+            if (PlayerCheck())
+            {
+                //idle
+                break;
             }
 
             //roam
@@ -237,7 +289,7 @@ public class AIController : MonoBehaviour
     private IEnumerator OnPatrol()
     {
         //animate
-        _animator.SetTrigger("Run");
+        _animator.SetInteger("State", (int)EnemyAnimationState.Move1);
 
         while (true)
         {
@@ -307,6 +359,12 @@ public class AIController : MonoBehaviour
         yield return null;
     }
 
+    public void Hurt(float time)
+    {
+        _stunTime = time;
+        SetState(AIState.Stunned);
+    }
+
     public void Stun(float time)
     {
         _stunTime = time / StunRecoveryMultiplier;
@@ -317,17 +375,59 @@ public class AIController : MonoBehaviour
     {
         if (_renderer.flipX)
         {
-            return LeftWallDetector.WallCheck(WallDetectionRange, false);
+            if (CollidesWithEnemies)
+            {
+                return LeftWallDetector.WallCheck(DetectionRange) || Physics2D.Raycast(_collider.bounds.center - _collider.bounds.extents - new Vector3(DetectionRange, 0.0f, 0.0f), Vector2.up, _collider.bounds.size.y, LayerMask.GetMask("Enemy")).collider != null;
+            }
+            else
+            {
+                return LeftWallDetector.WallCheck(DetectionRange);
+            }            
         }
         else
         {
-            return RightWallDetector.WallCheck(WallDetectionRange, true);
+            if (CollidesWithEnemies)
+            {
+                return RightWallDetector.WallCheck(DetectionRange) || Physics2D.Raycast(_collider.bounds.center + _collider.bounds.extents + new Vector3(DetectionRange, 0.0f, 0.0f), Vector2.down, _collider.bounds.size.y, LayerMask.GetMask("Enemy")).collider != null;
+            }
+            else
+            {
+                return RightWallDetector.WallCheck(DetectionRange);
+            }
+        }
+    }
+
+    private bool LedgeCheck()
+    {
+        if (_renderer.flipX)
+        {
+            return LeftLedgeDetector.LedgeCheck(DetectionRange);
+        }
+        else
+        {
+            return RightLedgeDetector.LedgeCheck(DetectionRange);
+        }
+    }
+
+    private bool PlayerCheck()
+    {
+        if (CollidesWithPlayer && _renderer.flipX)
+        {
+            return LeftWallDetector.WallCheck(DetectionRange) || Physics2D.Raycast(_collider.bounds.center - _collider.bounds.extents - new Vector3(DetectionRange, 0.0f, 0.0f), Vector2.up, _collider.bounds.size.y, LayerMask.GetMask("Player")).collider != null;
+        }
+        else if (CollidesWithPlayer)
+        {
+            return RightWallDetector.WallCheck(DetectionRange) || Physics2D.Raycast(_collider.bounds.center + _collider.bounds.extents + new Vector3(DetectionRange, 0.0f, 0.0f), Vector2.down, _collider.bounds.size.y, LayerMask.GetMask("Player")).collider != null;
+        }
+        else
+        {
+            return false;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other == MovementArea.GetComponent<Collider2D>())
+        if (_movementArea != null && other == _movementArea)
         {
             //turn around
             _renderer.flipX = !_renderer.flipX;

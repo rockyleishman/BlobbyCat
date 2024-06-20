@@ -35,6 +35,9 @@ MonoBehaviour:
   HorizontalLookDistance: 6
   VerticalLookDistance: 4.5
   LookDampingTime: 0.5
+  DartSlowEffect: {fileID: 8295572130690841561, guid: 13468c43aa59e774caaaf285fa034f16, type: 3}
+  DartFastEffect: {fileID: 8295572130690841561, guid: ae7e42874104eac4886f13ff67832609, type: 3}
+  DartSuperFastEffect: {fileID: 8295572130690841561, guid: 7b3eb01c23b94ea43bdf723f454b4f09, type: 3}
   DartTime: 0.25
   GroundDartSpeedBoost: 2.5
   GroundDartMinimumSpeed: 5
@@ -43,6 +46,7 @@ MonoBehaviour:
   AirDartMinimumSpeed: 5
   AirDartMaximumSpeed: 10
   OverdriveDeceleration: 1
+  StepEffect: {fileID: 0}
   GroundMovementSpeed: 5
   GroundAcceleration: 30
   GroundDeceleration: 30
@@ -64,25 +68,28 @@ MonoBehaviour:
   Gravity: 20
   NegativeTerminalVelocity: 10
   PositiveVelocityHalflife: 0.5
+  LandEffect: {fileID: 8295572130690841561, guid: f58b30d6a0c80004591119176d1a7342, type: 3}
   GroundDetectionRange: 0.0625
   Hangtime: 0.1
   JumpCooldown: 0.25
-  DamageJumpHeight: 1.25
-  DamageJumpTime: 0.5
+  HighJumpEffect: {fileID: 8295572130690841561, guid: a00c863600a71bf4cb1ffd752c55cc12, type: 3}
   HighJumpWindow: 0.1
   HighJumpHeight: 3.25
   HighJumpTime: 0.5
+  SingleJumpEffect: {fileID: 8295572130690841561, guid: 70b305d54865a0748aa3a0738e4d5e5c, type: 3}
   SingleJumpHeight: 2.25
   SingleJumpTime: 0.5
+  DoubleJumpEffect: {fileID: 8295572130690841561, guid: 0970d7e2d5695fe469f0e7a5acb44788, type: 3}
   DoubleJumpHeight: 2
   DoubleJumpTime: 0.5
+  TripleJumpEffect: {fileID: 8295572130690841561, guid: c8f35653d8b44c841be4c01cd0704d2e, type: 3}
   TripleJumpHeight: 1
   TripleJumpTime: 0.375
   SlapAttackDamage: 2
   SlapAttackCost: 0
   SlapAttackTime: 0.1
   SlapAttackCooldown: 0.15
-  SlamAttackDamage: 1
+  SlamAttackDamage: 2
   SlamAttackCost: 0
   SlamAttackCooldown: 0.1
   SlamAttackGravity: 40
@@ -91,25 +98,18 @@ MonoBehaviour:
   SpinAttackCost: 0.25
   SpinAttackTime: 0.5
   SpinAttackCooldown: 0.1
-  PounceAttackDamage: 2
+  PounceAttackDamage: 4
   PounceAttackCost: 0.25
   PounceAttackCooldown: 0.1
   PounceSpeed: 7.5
+  PounceJumpEffect: {fileID: 8295572130690841561, guid: 75d508e082dc79549afa55f381acfbfc, type: 3}
   PounceJumpHeight: 1.25
   PounceJumpTime: 0.5
   PostDamageInvincibilityTime: 1
+  DamageJumpHeight: 1.25
+  DamageJumpTime: 0.5
   DamageFromFallingBoxes: 1
   DamageFromWater: 1
   CollectableDelay: 0.1
   CollectableSuction: 1
   CollectableMaxSpeed: 20
-  StepEffect: {fileID: 0}
-  DartSlowEffect: {fileID: 8295572130690841561, guid: 13468c43aa59e774caaaf285fa034f16, type: 3}
-  DartFastEffect: {fileID: 8295572130690841561, guid: ae7e42874104eac4886f13ff67832609, type: 3}
-  DartSuperFastEffect: {fileID: 8295572130690841561, guid: 7b3eb01c23b94ea43bdf723f454b4f09, type: 3}
-  LandEffect: {fileID: 8295572130690841561, guid: f58b30d6a0c80004591119176d1a7342, type: 3}
-  HighJumpEffect: {fileID: 8295572130690841561, guid: a00c863600a71bf4cb1ffd752c55cc12, type: 3}
-  SingleJumpEffect: {fileID: 8295572130690841561, guid: 70b305d54865a0748aa3a0738e4d5e5c, type: 3}
-  DoubleJumpEffect: {fileID: 8295572130690841561, guid: 0970d7e2d5695fe469f0e7a5acb44788, type: 3}
-  TripleJumpEffect: {fileID: 8295572130690841561, guid: c8f35653d8b44c841be4c01cd0704d2e, type: 3}
-  PounceJumpEffect: {fileID: 8295572130690841561, guid: 75d508e082dc79549afa55f381acfbfc, type: 3}

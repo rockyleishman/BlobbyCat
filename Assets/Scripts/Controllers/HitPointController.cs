@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class HitPointController : MonoBehaviour, IHitPointController
 {
+    private AIController _aiController;
+
     [SerializeField] public int MaxHitPoints = 1;
     private int _currentHitPoints;
     [SerializeField] public float PostDamageInvincibilityTime = 0.25f;
@@ -15,6 +17,7 @@ public class HitPointController : MonoBehaviour, IHitPointController
     private void Start()
     {
         //init fields
+        _aiController = GetComponent<AIController>();
         _currentHitPoints = MaxHitPoints;
         _invincible = false;
         _damageableSpriteRandomizer = GetComponent<DamageableSpriteRandomizer>();
@@ -96,6 +99,10 @@ public class HitPointController : MonoBehaviour, IHitPointController
     private IEnumerator OnInvincibility()
     {
         _invincible = true;
+        if (_aiController != null)
+        {
+            _aiController.Hurt(PostDamageInvincibilityTime);
+        }
 
         yield return new WaitForSeconds(PostDamageInvincibilityTime);
 

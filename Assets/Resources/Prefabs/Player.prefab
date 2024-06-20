@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8696856840507983366}
   - component: {fileID: 2228281852779517833}
   - component: {fileID: 2865551530685470424}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: LeftSlapHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2386861814745176631}
   - component: {fileID: 4240629543040405533}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CameraTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,8 +299,11 @@ GameObject:
   - component: {fileID: 8978949434791345342}
   - component: {fileID: 1583809032349725098}
   - component: {fileID: 7069208738736371575}
+  - component: {fileID: 7905988014639202306}
   - component: {fileID: 5543670350974115007}
   - component: {fileID: 1511140447543335885}
+  - component: {fileID: 5008104271654879086}
+  - component: {fileID: 1595207596602629380}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -542,6 +545,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef64dccae40426642bec8e0f220b1216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7905988014639202306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409814553793068631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fffbba99219f7647b5e043d1c095112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5543670350974115007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +581,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fb61b3b77db0c42b3a41afc753d2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5008104271654879086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409814553793068631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b5c67e8edf8741aaa769b1981ff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 780f868d89f452a4ab07adeb80726d42, type: 2}
+  OnEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8978949434791345342}
+        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1583809032349725098}
+        m_TargetAssemblyTypeName: PlayerAttackController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7069208738736371575}
+        m_TargetAssemblyTypeName: PlayerActionController, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1595207596602629380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409814553793068631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b5c67e8edf8741aaa769b1981ff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 0ab01301ae048214882f0a064aab0780, type: 2}
+  OnEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8978949434791345342}
+        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1583809032349725098}
+        m_TargetAssemblyTypeName: PlayerAttackController, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7069208738736371575}
+        m_TargetAssemblyTypeName: PlayerActionController, Assembly-CSharp
+        m_MethodName: OnResume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3695847745719477414
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +700,7 @@ GameObject:
   - component: {fileID: 5043230724611578237}
   - component: {fileID: 8160603920658698763}
   - component: {fileID: 8093788474400335522}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: SlamHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -812,7 +931,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736365724082074414}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: AttackHitboxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +972,7 @@ GameObject:
   - component: {fileID: 825709069274458754}
   - component: {fileID: 7791080318507377304}
   - component: {fileID: 8532561014516953980}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: LeftPounceHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,7 +1112,7 @@ GameObject:
   - component: {fileID: 369474117327740981}
   - component: {fileID: 441943638492307788}
   - component: {fileID: 6340643016980581424}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: SpinHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 783998283185303311}
   - component: {fileID: 9152804006798875049}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GroundDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1389,7 @@ GameObject:
   - component: {fileID: 1441085792792504663}
   - component: {fileID: 4661411125093361185}
   - component: {fileID: 3298707287357859346}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: BoxHeadHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1360,7 +1479,7 @@ GameObject:
   - component: {fileID: 8640020206602635619}
   - component: {fileID: 9103273811493175072}
   - component: {fileID: 695605632316172319}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: CollectionSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1442,7 +1561,7 @@ GameObject:
   - component: {fileID: 9107457303787137672}
   - component: {fileID: 8658904783140231331}
   - component: {fileID: 2358621807450991676}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: RightPounceHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1582,7 +1701,7 @@ GameObject:
   - component: {fileID: 1251552262341628377}
   - component: {fileID: 7947317364940899822}
   - component: {fileID: 867413263413210118}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: RightSlapHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1815,7 +1934,7 @@ GameObject:
   - component: {fileID: 3127803819063386573}
   - component: {fileID: 5771735358378014695}
   - component: {fileID: 1703532068202552851}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StepEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -7,6 +7,7 @@ public class PlayerMovementController : MonoBehaviour
 {
     private PlayerValues _playerValuesObject;
     private PlayerStatus _playerStatusObject;
+    private GameStatus _gameStatusObject;
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
@@ -24,6 +25,8 @@ public class PlayerMovementController : MonoBehaviour
     private float _jumpTimer;
     private float _jumpCooldownTimer;
 
+    private bool _isConflictingInputEnabled;
+
     private float _runningJumpTime;
     private float _runningJumpHeight;
 
@@ -32,6 +35,7 @@ public class PlayerMovementController : MonoBehaviour
         //init fields
         _playerValuesObject = DataManager.Instance.PlayerValuesObject;
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
+        _gameStatusObject = DataManager.Instance.GameStatusObject;
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -43,6 +47,7 @@ public class PlayerMovementController : MonoBehaviour
         _dartTimer = 0.0f;
         _jumpTimer = 0.0f;
         _jumpCooldownTimer = 0.0f;
+        _isConflictingInputEnabled = true;
     }
 
     private void OnEnable()
@@ -677,12 +682,15 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        _jumpInput = value.Get<float>() != 0.0f;
+        if (_isConflictingInputEnabled)
+        {
+            _jumpInput = value.Get<float>() != 0.0f;
+        }
     }
 
     private void OnDart()
     {
-        if (_playerStatusObject.HasDartToken)
+        if (_playerStatusObject.HasDartToken && _isConflictingInputEnabled)
         {
             //calculate horizontal velocity
             float boostedVelocity;
@@ -782,5 +790,25 @@ public class PlayerMovementController : MonoBehaviour
             _dartTimer = _playerValuesObject.DartTime;
             _playerStatusObject.HasDartToken = false;
         }
+    }
+
+    public void OnPause()
+    {
+        //disable conflicting inputs
+        _isConflictingInputEnabled = false;
+    }
+
+    public void OnResume()
+    {
+        StartCoroutine(OnResumeDelay());
+    }
+
+    private IEnumerator OnResumeDelay()
+    {
+        //delay
+        yield return null;
+        
+        //enable inputs
+        _isConflictingInputEnabled = true;
     }
 }

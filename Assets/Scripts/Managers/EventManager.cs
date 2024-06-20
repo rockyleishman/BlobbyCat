@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EventManager : Singleton<EventManager>
 {
+    [Header("Pause Events")]
+    [Space(10)]
+    [SerializeField] public GameEvent OnPause;
+    [SerializeField] public GameEvent OnResume;
     [Space(10)]
     [Header("Attack Hitbox Events")]
     [Space(10)]

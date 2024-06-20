@@ -10,10 +10,8 @@ public class FallingGrate : MonoBehaviour
 
     [SerializeField] public float TimeBeforeFall = 0.25f;
     [SerializeField] public float Gravity = 20.0f;
-    [SerializeField] public float TerminalVelocity = 15f;
-
-    private Collider2D _collider;
-    private Rigidbody2D _rigidbody;
+    [SerializeField] public float TerminalVelocity = 20.0f;
+    [SerializeField] public float GroundDetectionYOrigin = 0.0f;
 
     private bool _isFalling;
 
@@ -21,8 +19,6 @@ public class FallingGrate : MonoBehaviour
     {
         //init fields
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
-        _collider = GetComponent<Collider2D>();
-        _rigidbody = GetComponent<Rigidbody2D>();
         _isFalling = false;
 
         //randomize sprite
@@ -45,15 +41,27 @@ public class FallingGrate : MonoBehaviour
         yield return new WaitForSeconds(TimeBeforeFall);
 
         //fall
-        while (!_collider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        float velocity = 0.0f;
+        while (_isFalling)
         {
-            _rigidbody.velocity = new Vector2(0.0f, Mathf.Clamp(_rigidbody.velocity.y - Gravity * Time.deltaTime, -TerminalVelocity, 0.0f));
+            velocity = Mathf.Clamp(velocity - Gravity * Time.deltaTime, -TerminalVelocity, 0.0f);
+            float deltaY = velocity * Time.deltaTime;
+
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.0f, GroundDetectionYOrigin, 0.0f), Vector2.down, -deltaY, LayerMask.GetMask("Ground"));
+            if (hit.collider != null)
+            {
+                //end fall
+                //TODO: effects
+                _isFalling = false;
+                Destroy(gameObject);
+            }
+            else
+            {
+                //continue fall
+                transform.position = new Vector3(transform.position.x, transform.position.y + deltaY, 0.0f);
+            }            
 
             yield return null;
-        }
-
-        //end fall
-        //TODO: effects
-        Destroy(gameObject);
+        }        
     }
 }

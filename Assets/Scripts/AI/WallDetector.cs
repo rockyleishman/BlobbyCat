@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallDetector : MonoBehaviour
 {
-    public bool WallCheck(float detectionRange, bool isCheckingRightSide)
+    public bool WallCheck(float detectionRange)
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, detectionRange, LayerMask.GetMask("Ground"));
 

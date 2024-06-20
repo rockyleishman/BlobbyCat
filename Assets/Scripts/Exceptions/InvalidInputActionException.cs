@@ -1,0 +1,1 @@
+public class InvalidInputActionException : System.Exception {}

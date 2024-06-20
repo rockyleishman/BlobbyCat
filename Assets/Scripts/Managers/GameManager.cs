@@ -5,9 +5,13 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private PlayerStatus _playerStatusObject;
+    private GameStatus _gameStatusObject;
 
     [SerializeField] public MajorCheckpoint StartingCheckpoint;
-
+    [Space(10)]
+    [SerializeField] public bool IsHubLevel;
+    [SerializeField] public bool HasDebugMenu;
+    [Space(10)]
     [SerializeField] public Color LevelFadeColour = Color.black;
     [SerializeField] public float LevelFadeInTime = 1.0f;
     [SerializeField] public float DamageRespawnInTime = 0.5f;
@@ -25,11 +29,16 @@ public class GameManager : Singleton<GameManager>
     {
         //init fields
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
+        _gameStatusObject = DataManager.Instance.GameStatusObject;
         _isRespawning = false;
+
+        _playerStatusObject.MaxHitPoints = 3;/////////////////////////remove
+        //set game status object
+        SetGameStatus();
 
         //TODO: change when implementing persistant player data
         //reset player status object
-        ResetPlayerStatus();        
+        ResetPlayerStatus();
     }
 
     private void Start()
@@ -46,12 +55,21 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.CurrentMinorCheckpoint = StartingCheckpoint;
 
         _playerStatusObject.CurrentSubHitPoints = 0;
-        _playerStatusObject.CurrentHitPoints = 9;
-        _playerStatusObject.MaxHitPoints = 9;
+        _playerStatusObject.CurrentHitPoints = _playerStatusObject.MaxHitPoints;
 
         _playerStatusObject.IsFacingRight = true;
 
         ResetPlayerStates();
+    }
+
+    private void SetGameStatus()
+    {
+        //TODO: set based on save data/////////////////////////////////////////////////////////
+        _gameStatusObject.unlockedDash = false;
+        _gameStatusObject.unlockedClimb = false;
+        _gameStatusObject.unlockedLiquidCat = false;
+        _gameStatusObject.unlockedChonkMode = false;
+        _gameStatusObject.unlockedDoubleJump = false;
     }
 
     private void ResetPlayerStates()
@@ -70,6 +88,7 @@ public class GameManager : Singleton<GameManager>
 
         _playerStatusObject.HasGeneralJumpToken = true;
         _playerStatusObject.IsJumping = false;
+        _playerStatusObject.IsDamageJumping = false;
         _playerStatusObject.HasHighJumpToken = false;
         _playerStatusObject.IsHighJumping = false;
         _playerStatusObject.HasSingleJumpToken = false;

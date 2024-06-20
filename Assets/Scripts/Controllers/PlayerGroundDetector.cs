@@ -29,11 +29,11 @@ public class PlayerGroundDetector : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit2D hitCentre = Physics2D.Raycast(transform.position + new Vector3(0.0f, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
-        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
-        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground"));
-        RaycastHit2D hitLeftSlope = Physics2D.CircleCast(transform.position + new Vector3(-_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(-1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope"));
-        RaycastHit2D hitRightSlope = Physics2D.CircleCast(transform.position + new Vector3(_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope"));
+        RaycastHit2D hitCentre = Physics2D.Raycast(transform.position + new Vector3(0.0f, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
+        RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
+        RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
+        RaycastHit2D hitLeftSlope = Physics2D.CircleCast(transform.position + new Vector3(-_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(-1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope", "Enemy"));
+        RaycastHit2D hitRightSlope = Physics2D.CircleCast(transform.position + new Vector3(_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope", "Enemy"));
 
         if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null || hitLeftSlope.collider != null || hitRightSlope.collider != null) && !_playerStatusObject.IsGrounded && _rigidbody.velocity.y <= 0.0f)
         {
