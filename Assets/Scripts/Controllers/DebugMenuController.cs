@@ -57,7 +57,7 @@ public class DebugMenuController : MonoBehaviour
             ChangeHPText.text = MaxHPString;
         }
 
-        if (_gameStatusObject.unlockedDash)
+        if (_gameStatusObject.unlockedDart)
         {
             UnlockDashText.text = LockDashString;
         }
@@ -167,7 +167,7 @@ public class DebugMenuController : MonoBehaviour
     {
         if (GameManager.Instance.HasDebugMenu)
         {
-            _gameStatusObject.unlockedDash = !_gameStatusObject.unlockedDash;
+            _gameStatusObject.unlockedDart = !_gameStatusObject.unlockedDart;
             UpdateText();
         }
     }

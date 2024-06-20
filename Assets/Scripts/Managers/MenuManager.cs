@@ -61,9 +61,8 @@ public class MenuManager : Singleton<MenuManager>
             _pauseMenuDefaultSelectable = PauseLevelMenuDebugDefaultSelectable;
         }
 
-        //hide menus & resume
+        //hide menus
         HideMenu();
-        Resume();
     }
 
     public void Resume()
@@ -73,16 +72,19 @@ public class MenuManager : Singleton<MenuManager>
 
     public void RestartLevel()
     {
+        _playerPauseController.OnResume();
         EventManager.Instance.OnRestartLevel.TriggerEvent(Vector3.zero);
     }
 
     public void ExitLevel()
     {
+        _playerPauseController.OnResume();
         EventManager.Instance.OnExitLevel.TriggerEvent(Vector3.zero);
     }
 
     public void QuitGame()
     {
+        _playerPauseController.OnResume();
         EventManager.Instance.OnQuitGame.TriggerEvent(Vector3.zero);
     }
 

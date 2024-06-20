@@ -6,6 +6,8 @@ public class FallingGrate : MonoBehaviour
 {
     private PlayerStatus _playerStatusObject;
 
+    private Rigidbody2D _playerRigidbody;
+
     [SerializeField] public Sprite[] RandomizedSprites;
 
     [SerializeField] public float TimeBeforeFall = 0.25f;
@@ -19,6 +21,7 @@ public class FallingGrate : MonoBehaviour
     {
         //init fields
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
+        _playerRigidbody = _playerStatusObject.Player.GetComponent<Rigidbody2D>();
         _isFalling = false;
 
         //randomize sprite
@@ -27,7 +30,7 @@ public class FallingGrate : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!_isFalling && collision.collider.GetComponent<Player>() != null && _playerStatusObject.IsGrounded)
+        if (!_isFalling && collision.collider.GetComponent<Player>() != null && _playerStatusObject.IsGrounded && _playerRigidbody.velocity.y <= 0.0f)
         {
             StartCoroutine(Fall());
         }

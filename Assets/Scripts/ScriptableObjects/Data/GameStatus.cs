@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameStatus : ScriptableObject
 {
     //UNLOCKABLE MOVES
-    internal bool unlockedDash;
+    internal bool unlockedDart;
     internal bool unlockedClimb;
     internal bool unlockedLiquidCat;
     internal bool unlockedChonkMode;

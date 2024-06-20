@@ -29,13 +29,19 @@ public class PlayerGroundDetector : MonoBehaviour
 
     private void Update()
     {
+        Grounding();
+        AlmostGrounding();
+    }
+
+    private void Grounding()
+    {
         RaycastHit2D hitCentre = Physics2D.Raycast(transform.position + new Vector3(0.0f, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
         RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
         RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
         RaycastHit2D hitLeftSlope = Physics2D.CircleCast(transform.position + new Vector3(-_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(-1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope", "Enemy"));
         RaycastHit2D hitRightSlope = Physics2D.CircleCast(transform.position + new Vector3(_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(1, -1), _playerValuesObject.GroundDetectionRange, LayerMask.GetMask("Slope", "Enemy"));
 
-        if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null || hitLeftSlope.collider != null || hitRightSlope.collider != null) && !_playerStatusObject.IsGrounded && _rigidbody.velocity.y <= 0.0f)
+        if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null || hitLeftSlope.collider != null || hitRightSlope.collider != null) && !_playerStatusObject.IsGrounded)
         {
             //start grounded
             _playerStatusObject.IsGrounded = true;
@@ -43,7 +49,6 @@ public class PlayerGroundDetector : MonoBehaviour
             _groundedTimer = 0.0f;
             _playerStatusObject.HasHighJumpToken = true;
             _playerStatusObject.HasDoubleJumpToken = false;
-            _playerStatusObject.HasTripleJumpToken = false;
             _playerStatusObject.HasDartToken = true;
 
             //play effect
@@ -93,6 +98,34 @@ public class PlayerGroundDetector : MonoBehaviour
         {
             _playerStatusObject.HasHighJumpToken = false;
             _playerStatusObject.HasSingleJumpToken = true;
+        }
+    }
+
+    private void AlmostGrounding()
+    {
+        //allows for jumping when hitting ground if jump input is before grounding without triggering a double/tripple jump
+        if (!_playerStatusObject.IsGrounded)
+        {
+            RaycastHit2D hitCentre = Physics2D.Raycast(transform.position + new Vector3(0.0f, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.AlmostGroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
+            RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.AlmostGroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
+            RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(_playerPositiveCentreOffset, -_playerRadii, 0.0f), Vector2.down, _playerValuesObject.AlmostGroundDetectionRange, LayerMask.GetMask("Ground", "Enemy"));
+            RaycastHit2D hitLeftSlope = Physics2D.CircleCast(transform.position + new Vector3(-_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(-1, -1), _playerValuesObject.AlmostGroundDetectionRange, LayerMask.GetMask("Slope", "Enemy"));
+            RaycastHit2D hitRightSlope = Physics2D.CircleCast(transform.position + new Vector3(_playerPositiveCentreOffset, 0.0f, 0.0f), _playerRadii, new Vector2(1, -1), _playerValuesObject.AlmostGroundDetectionRange, LayerMask.GetMask("Slope", "Enemy"));
+
+            if ((hitCentre.collider != null || hitLeft.collider != null || hitRight.collider != null || hitLeftSlope.collider != null || hitRightSlope.collider != null))
+            {
+                //start almost grounded
+                _playerStatusObject.IsAlmostGrounded = true;
+            }
+            else
+            {
+                _playerStatusObject.IsAlmostGrounded = false;
+            }
+        }
+        else
+        {
+            //end almost grounded
+            _playerStatusObject.IsAlmostGrounded = false;
         }
     }
 }

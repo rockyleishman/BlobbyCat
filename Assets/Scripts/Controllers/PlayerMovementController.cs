@@ -12,7 +12,7 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-    private ParticleSystem _particleSystem;
+    [SerializeField] private ParticleSystem _stepEffect;
 
     private Vector2 _velocity;
     private Vector2 _movementInput;
@@ -39,7 +39,7 @@ public class PlayerMovementController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
-        _particleSystem = GetComponentInChildren<ParticleSystem>();
+        _stepEffect = GetComponentInChildren<ParticleSystem>();
         _velocity = Vector2.zero;
         _movementInput = Vector2.zero;
         _runInput = false;
@@ -360,8 +360,8 @@ public class PlayerMovementController : MonoBehaviour
         //possible jump input
         HighJump();
         SingleJump();
-        //DoubleJump(); //TEMPORARILY DISABLED
-        //TripleJump(); //TEMPORARILY DISABLED
+        DoubleJump();
+        TripleJump();
 
         //allow new pounce jumps if not currently pounce attacking
         if (!_playerStatusObject.IsPounceAttacking)
@@ -467,15 +467,20 @@ public class PlayerMovementController : MonoBehaviour
 
     private void DoubleJump()
     {
-        if (_playerStatusObject.HasGeneralJumpToken && _playerStatusObject.HasDoubleJumpToken && _jumpInput && _jumpCooldownTimer <= 0.0f)
+        if (_playerStatusObject.HasGeneralJumpToken && ((_playerStatusObject.HasDoubleJumpToken && _gameStatusObject.unlockedDoubleJump) || _playerStatusObject.HasCatnipToken) && _jumpInput && _jumpCooldownTimer <= 0.0f && !_playerStatusObject.IsAlmostGrounded)
         {
+            //use catnip token if no double jump unlocked
+            if (!_gameStatusObject.unlockedDoubleJump)
+            {
+                GetComponent<PlayerCatnipController>().UseCatnip();
+            }
+
             //start jump
             _playerStatusObject.IsJumping = true;
             _playerStatusObject.IsSingleJumping = false;
             _playerStatusObject.IsDoubleJumping = true;
             _playerStatusObject.HasGeneralJumpToken = false;
             _playerStatusObject.HasDoubleJumpToken = false;
-            _playerStatusObject.HasTripleJumpToken = true;
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
 
@@ -509,14 +514,16 @@ public class PlayerMovementController : MonoBehaviour
 
     private void TripleJump()
     {
-        if (_playerStatusObject.HasGeneralJumpToken && _playerStatusObject.HasTripleJumpToken && _jumpInput && _jumpCooldownTimer <= 0.0f)
+        if (_playerStatusObject.HasGeneralJumpToken && _gameStatusObject.unlockedDoubleJump && _playerStatusObject.HasCatnipToken && _jumpInput && _jumpCooldownTimer <= 0.0f && !_playerStatusObject.IsAlmostGrounded)
         {
+            //use catnip token
+            GetComponent<PlayerCatnipController>().UseCatnip();
+
             //start jump
             _playerStatusObject.IsJumping = true;
             _playerStatusObject.IsDoubleJumping = false;
             _playerStatusObject.IsTripleJumping = true;
             _playerStatusObject.HasGeneralJumpToken = false;
-            _playerStatusObject.HasTripleJumpToken = false;
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
 
@@ -591,6 +598,14 @@ public class PlayerMovementController : MonoBehaviour
                 {
                     _velocity.y -= _playerValuesObject.SlamAttackGravity * Time.deltaTime;
                 }
+                else if (_playerStatusObject.IsSpinAttacking)
+                {
+                    _velocity.y -= _playerValuesObject.SpinAttackGravity * Time.deltaTime;
+                }
+                else if (_playerStatusObject.IsGrounded)
+                {
+                    _velocity.y -= _playerValuesObject.GroundedGravity * Time.deltaTime;
+                }
                 else
                 {
                     _velocity.y -= _playerValuesObject.Gravity * Time.deltaTime;
@@ -630,13 +645,13 @@ public class PlayerMovementController : MonoBehaviour
         _animator.SetFloat("HorizontalSpeed", Mathf.Abs(_velocity.x));
 
         //play effect for running/walking
-        if (!_particleSystem.isPlaying && _playerStatusObject.IsGrounded && Mathf.Abs(_movementInput.x) > 0.0f && Mathf.Abs(_velocity.x) > 0.0f)
+        if (!_stepEffect.isPlaying && _playerStatusObject.IsGrounded && Mathf.Abs(_movementInput.x) > 0.0f && Mathf.Abs(_velocity.x) > 0.0f)
         {
-            _particleSystem.Play();
+            _stepEffect.Play();
         }
         else
         {
-            _particleSystem.Stop();
+            _stepEffect.Stop();
         }
 
         //vertical movement
@@ -690,7 +705,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnDart()
     {
-        if (_playerStatusObject.HasDartToken && _isConflictingInputEnabled)
+        if (_gameStatusObject.unlockedDart && _playerStatusObject.HasDartToken && _isConflictingInputEnabled)
         {
             //calculate horizontal velocity
             float boostedVelocity;

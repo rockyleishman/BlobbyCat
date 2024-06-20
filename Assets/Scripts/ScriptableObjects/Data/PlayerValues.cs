@@ -52,9 +52,11 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float AirDartMaximumSpeed = 10.0f;
     [SerializeField] public float OverdriveDeceleration = 1.0f;
 
+    [Header("Catnip")]
+    [SerializeField] public Effect CatnipJumpEffect;
+    [SerializeField] public float MaxCatnipTime = 10.0f;
+
     [Header("Movement")]
-    [SerializeField] public Effect StepEffect;
-    [Space(10.0f)]
     [SerializeField] public float GroundMovementSpeed = 5.0f;
     [SerializeField] public float GroundAcceleration = 30.0f;
     [SerializeField] public float GroundDeceleration = 30.0f;
@@ -89,7 +91,9 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public Effect LandEffect;
     [Space(10.0f)]
     [SerializeField] public float GroundDetectionRange = 0.0625f;
+    [SerializeField] public float AlmostGroundDetectionRange = 0.75f;
     [SerializeField] public float Hangtime = 0.1f;
+    [SerializeField] public float GroundedGravity = 10.0f;
 
     [Header("Jump")]
     [SerializeField] public float JumpCooldown = 0.25f;
@@ -104,12 +108,12 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float SingleJumpTime = 0.5f;
     [Space(10.0f)]
     [SerializeField] public Effect DoubleJumpEffect;
-    [SerializeField] public float DoubleJumpHeight = 2.0f;
+    [SerializeField] public float DoubleJumpHeight = 2.125f;
     [SerializeField] public float DoubleJumpTime = 0.5f;
     [Space(10.0f)]
     [SerializeField] public Effect TripleJumpEffect;
-    [SerializeField] public float TripleJumpHeight = 1.0f;
-    [SerializeField] public float TripleJumpTime = 0.375f;
+    [SerializeField] public float TripleJumpHeight = 2.125f;
+    [SerializeField] public float TripleJumpTime = 0.5f;
 
     [Header("Attack: Slap")]
     [SerializeField] public int SlapAttackDamage = 2;
@@ -128,6 +132,7 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public int SpinAttackDamage = 1;
     [SerializeField] public float SpinAttackCost = 0.25f;
     [SerializeField] public float SpinAttackTime = 0.5f;
+    [SerializeField] public float SpinAttackGravity = 5.0f;
     [SerializeField] public float SpinAttackCooldown = 0.1f;
 
     [Header("Attack: Pounce")]

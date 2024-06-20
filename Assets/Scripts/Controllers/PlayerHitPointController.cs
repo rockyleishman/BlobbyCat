@@ -53,7 +53,7 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
         //update HUD
         HUDManager.Instance.UpdateHP();
 
-        //TODO: animate heal
+        //TODO: animate heal////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
 
@@ -81,7 +81,7 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
             //update HUD
             HUDManager.Instance.UpdateHP();
 
-            //TODO: animate damage
+            //TODO: animate damage////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
             //heal if full sub hit points
@@ -111,12 +111,18 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
 
     public void Defeat()
     {
+        //animate HP
         HUDManager.Instance.UpdateHP();
 
-        //TODO: player death
-        Debug.Log("PLAYER DIED");
+        //zero sub hit points
+        _playerStatusObject.CurrentSubHitPoints = 0;
 
-        //TODO: animate death
+        //TODO: reset level stuff based on last major checkpoint//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //player death
+        GameManager.Instance.DeathRespawn();
+
+        //TODO: animate death//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     }
 

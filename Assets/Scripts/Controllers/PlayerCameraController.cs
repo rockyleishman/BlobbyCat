@@ -44,6 +44,11 @@ public class PlayerCameraController : MonoBehaviour
         }        
     }
 
+    public void ResetCamera()
+    {
+        _cameraTarget.transform.localPosition = Vector3.zero;
+    }
+
     private void OnLook(InputValue value)
     {
         _lookInput = value.Get<Vector2>();

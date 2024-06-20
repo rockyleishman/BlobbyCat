@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Collectable : MonoBehaviour
+public class Collectable : PoolObject
 {
     private PlayerValues _playerValuesObject;
-    private PlayerStatus _playerStatusObject;
+    protected PlayerStatus _playerStatusObject;
     protected LevelCollectionData _levelCollectionData;
     protected Animator _animator;
     protected SpriteRenderer _renderer;
@@ -17,7 +17,7 @@ public class Collectable : MonoBehaviour
     [SerializeField] public float FloatHeight = 0.5f;
     [SerializeField] public float FloatSpeed = 2.0f;
     private Vector2 _velocity;
-    private bool _isBeingSucked;
+    protected bool _isBeingSucked;
     private bool _isCollectable;
     private bool _isFloatingUp;
 

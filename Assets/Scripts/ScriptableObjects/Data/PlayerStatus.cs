@@ -22,6 +22,7 @@ public class PlayerStatus : ScriptableObject
     
     //GROUND
     internal bool IsGrounded = false;
+    internal bool IsAlmostGrounded = false;
 
     //CROUCH
     internal bool IsCrouching = false;
@@ -36,25 +37,23 @@ public class PlayerStatus : ScriptableObject
     //DART
     internal bool HasDartToken = true;
 
+    //CATNIP
+    internal bool HasCatnipToken = false;
+
     //JUMP
     internal bool HasGeneralJumpToken = true;
     internal bool IsJumping = false;
 
     internal bool HasHighJumpToken = false;
     internal bool IsHighJumping = false;
-    internal bool IsLongLeaping = false;//remove
 
     internal bool HasSingleJumpToken = false;
     internal bool IsSingleJumping = false;
-    internal bool IsSingleLeaping = false;//remove
 
     internal bool HasDoubleJumpToken = false;
     internal bool IsDoubleJumping = false;
-    internal bool IsDoubleLeaping = false;//remove
 
-    internal bool HasTripleJumpToken = false;
     internal bool IsTripleJumping = false;
-    internal bool IsTripleLeaping = false;//remove
 
     internal bool IsPounceJumping = false;
 

@@ -46,7 +46,8 @@ MonoBehaviour:
   AirDartMinimumSpeed: 5
   AirDartMaximumSpeed: 10
   OverdriveDeceleration: 1
-  StepEffect: {fileID: 0}
+  CatnipJumpEffect: {fileID: 8295572130690841561, guid: dfa30504f3898d149bb6de72264d823c, type: 3}
+  MaxCatnipTime: 10
   GroundMovementSpeed: 5
   GroundAcceleration: 30
   GroundDeceleration: 30
@@ -70,6 +71,7 @@ MonoBehaviour:
   PositiveVelocityHalflife: 0.5
   LandEffect: {fileID: 8295572130690841561, guid: f58b30d6a0c80004591119176d1a7342, type: 3}
   GroundDetectionRange: 0.0625
+  AlmostGroundDetectionRange: 0.75
   Hangtime: 0.1
   JumpCooldown: 0.25
   HighJumpEffect: {fileID: 8295572130690841561, guid: a00c863600a71bf4cb1ffd752c55cc12, type: 3}
@@ -80,11 +82,11 @@ MonoBehaviour:
   SingleJumpHeight: 2.25
   SingleJumpTime: 0.5
   DoubleJumpEffect: {fileID: 8295572130690841561, guid: 0970d7e2d5695fe469f0e7a5acb44788, type: 3}
-  DoubleJumpHeight: 2
+  DoubleJumpHeight: 2.125
   DoubleJumpTime: 0.5
   TripleJumpEffect: {fileID: 8295572130690841561, guid: c8f35653d8b44c841be4c01cd0704d2e, type: 3}
-  TripleJumpHeight: 1
-  TripleJumpTime: 0.375
+  TripleJumpHeight: 2.125
+  TripleJumpTime: 0.5
   SlapAttackDamage: 2
   SlapAttackCost: 0
   SlapAttackTime: 0.1

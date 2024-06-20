@@ -8,10 +8,14 @@ public class GameManager : Singleton<GameManager>
     private PlayerStatus _playerStatusObject;
     private GameStatus _gameStatusObject;
 
+    private Cinemachine.CinemachineBrain _cinemachineBrain;
+
     [SerializeField] public MajorCheckpoint StartingCheckpoint;
     [Space(10)]
     [SerializeField] public bool IsHubLevel;
     [SerializeField] public bool HasDebugMenu;
+    [Space(10)]
+    [SerializeField] internal Vector3 ObjectLimboPosition = new Vector3(0.0f, 1000.0f, 0.0f);
     [Space(10)]
     [SerializeField] public Color LevelFadeColour = Color.black;
     [SerializeField] public float LevelFadeInTime = 1.0f;
@@ -31,13 +35,14 @@ public class GameManager : Singleton<GameManager>
         //init fields
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
         _gameStatusObject = DataManager.Instance.GameStatusObject;
+        _cinemachineBrain = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
         _isRespawning = false;
 
-        _playerStatusObject.MaxHitPoints = 3;/////////////////////////remove
+        _playerStatusObject.MaxHitPoints = 3;/////////////////////////remove///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //set game status object
         SetGameStatus();
 
-        //TODO: change when implementing persistant player data
+        //TODO: change when implementing persistant player data//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //reset player status object
         ResetPlayerStatus();
     }
@@ -65,8 +70,8 @@ public class GameManager : Singleton<GameManager>
 
     private void SetGameStatus()
     {
-        //TODO: set based on save data/////////////////////////////////////////////////////////
-        _gameStatusObject.unlockedDash = false;
+        //TODO: set based on save data///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        _gameStatusObject.unlockedDart = false;
         _gameStatusObject.unlockedClimb = false;
         _gameStatusObject.unlockedLiquidCat = false;
         _gameStatusObject.unlockedChonkMode = false;
@@ -87,6 +92,8 @@ public class GameManager : Singleton<GameManager>
 
         _playerStatusObject.HasDartToken = true;
 
+        _playerStatusObject.HasCatnipToken = false;
+
         _playerStatusObject.HasGeneralJumpToken = true;
         _playerStatusObject.IsJumping = false;
         _playerStatusObject.IsDamageJumping = false;
@@ -96,7 +103,6 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.IsSingleJumping = false;
         _playerStatusObject.HasDoubleJumpToken = false;
         _playerStatusObject.IsDoubleJumping = false;
-        _playerStatusObject.HasTripleJumpToken = false;
         _playerStatusObject.IsTripleJumping = false;
         _playerStatusObject.IsPounceJumping = false;
     }
@@ -115,7 +121,7 @@ public class GameManager : Singleton<GameManager>
 
         _playerStatusObject.Player.gameObject.SetActive(false);
 
-        //TODO: effects
+        //TODO: effects///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //hide
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = false;
@@ -131,8 +137,14 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMinorCheckpoint.transform.position;
         _playerStatusObject.Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
+        //reset camera
+        _cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().ForceCameraPosition(new Vector3(_playerStatusObject.Player.transform.position.x, _playerStatusObject.Player.transform.position.y, Camera.main.transform.position.z), Camera.main.transform.rotation);
+
         //out time
         yield return new WaitForSeconds(DamageRespawnOutTime);
+
+        //rereset camera
+        _cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().ForceCameraPosition(new Vector3(_playerStatusObject.Player.transform.position.x, _playerStatusObject.Player.transform.position.y, Camera.main.transform.position.z), Camera.main.transform.rotation);
 
         //fade in time
         FadeManager.Instance.FadeIn(LevelFadeColour, DamageRespawnFadeInTime);
@@ -144,7 +156,7 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;
         _playerStatusObject.Player.gameObject.SetActive(true);
 
-        //TODO: respawn effects
+        //TODO: respawn effects////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         _isRespawning = false;
     }
@@ -164,7 +176,7 @@ public class GameManager : Singleton<GameManager>
         //disable
         _playerStatusObject.Player.gameObject.SetActive(false);
 
-        //TODO: play death animation & effects
+        //TODO: play death animation & effects////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //hide
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = false;
@@ -180,8 +192,14 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMajorCheckpoint.transform.position;
         _playerStatusObject.Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
+        //reset camera
+        _cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().ForceCameraPosition(new Vector3(_playerStatusObject.Player.transform.position.x, _playerStatusObject.Player.transform.position.y, Camera.main.transform.position.z), Camera.main.transform.rotation);
+
         //out time
         yield return new WaitForSeconds(DeathRespawnOutTime);
+
+        //rereset camera
+        _cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().ForceCameraPosition(new Vector3(_playerStatusObject.Player.transform.position.x, _playerStatusObject.Player.transform.position.y, Camera.main.transform.position.z), Camera.main.transform.rotation);
 
         //fade in time
         FadeManager.Instance.FadeIn(LevelFadeColour, DeathRespawnFadeInTime);
@@ -193,7 +211,10 @@ public class GameManager : Singleton<GameManager>
         _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;
         _playerStatusObject.Player.gameObject.SetActive(true);
 
-        //TODO: respawn effects
+        //restore player HP
+        _playerStatusObject.Player.GetComponent<PlayerHitPointController>().RestoreHitPoints();
+
+        //TODO: respawn effects////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         _isRespawning = false;
     }
