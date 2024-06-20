@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 7919692203760207259}
   - component: {fileID: 6109352688546666816}
   - component: {fileID: 7898244398403664227}
+  - component: {fileID: 8649531652719216697}
+  - component: {fileID: 3860353589847453451}
+  - component: {fileID: 44706596906353509}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -89,6 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e51a2d692c4ea41887fb4f7493f1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnRestartLevel: {fileID: 11400000, guid: f02f73d5a9228e949bebad6e7c053160, type: 2}
+  OnExitLevel: {fileID: 11400000, guid: a1e3d6adc17a43f489a7211374078d67, type: 2}
+  OnQuitGame: {fileID: 11400000, guid: 091d2a10012500c4b91855c24b052bca, type: 2}
   OnPause: {fileID: 11400000, guid: 780f868d89f452a4ab07adeb80726d42, type: 2}
   OnResume: {fileID: 11400000, guid: 0ab01301ae048214882f0a064aab0780, type: 2}
   OnEnableRightSlapHitbox: {fileID: 11400000, guid: b82a5cb6ff332c4498e7fcb8aced64b0, type: 2}
@@ -127,3 +133,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a80c9e0bb0c844cafe11fda16a18c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8649531652719216697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291533991018468485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b5c67e8edf8741aaa769b1981ff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: f02f73d5a9228e949bebad6e7c053160, type: 2}
+  OnEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4166404007579781725}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3860353589847453451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291533991018468485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b5c67e8edf8741aaa769b1981ff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: a1e3d6adc17a43f489a7211374078d67, type: 2}
+  OnEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4166404007579781725}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ExitLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &44706596906353509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291533991018468485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b5c67e8edf8741aaa769b1981ff05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: 091d2a10012500c4b91855c24b052bca, type: 2}
+  OnEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4166404007579781725}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

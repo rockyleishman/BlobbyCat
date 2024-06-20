@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class EventManager : Singleton<EventManager>
 {
+    [Header("Scene Management Events")]
+    [Space(10)]
+    [SerializeField] public GameEvent OnRestartLevel;
+    [SerializeField] public GameEvent OnExitLevel;
+    [SerializeField] public GameEvent OnQuitGame;
+    [Space(10)]
     [Header("Pause Events")]
     [Space(10)]
     [SerializeField] public GameEvent OnPause;

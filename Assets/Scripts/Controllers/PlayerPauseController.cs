@@ -9,7 +9,7 @@ public class PlayerPauseController : MonoBehaviour
 
     private bool _isConflictingInputEnabled;
 
-    private void Start()
+    private void Awake()
     {
         //init fields
         _playerInput = GetComponent<PlayerInput>();
