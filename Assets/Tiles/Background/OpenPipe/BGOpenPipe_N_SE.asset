@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c86e1bb3b78c4548a7a120062778c84, type: 3}
+  m_Name: BGOpenPipe_N_SE
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 1390437713, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+  m_DefaultGameObject: {fileID: 0}
+  m_DefaultColliderType: 0
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 1390437713, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: -818845193, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1909577174, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1994447197, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1548671371, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: -1000613971, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 266737525, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1531612302, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: -978954138, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 748336307, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 773680072, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: -860063768, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1027370365, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1517764458, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 495320206, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    - {fileID: 1360955729, guid: df06ba7f5ee7f944fa71404dde9ab024, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.5
+    m_Output: 1
+    m_ColliderType: 0
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions:
+    - {x: -1, y: 1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: -1, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: 1, y: -1, z: 0}
+    m_RuleTransform: 0
+  BlendedTiles: []
+  TileBlendSets: []

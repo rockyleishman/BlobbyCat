@@ -73,6 +73,8 @@ MonoBehaviour:
   GroundDetectionRange: 0.0625
   AlmostGroundDetectionRange: 0.75
   Hangtime: 0.1
+  GroundedGravity: 10
+  WallBumpDistance: 0.01
   JumpCooldown: 0.25
   HighJumpEffect: {fileID: 8295572130690841561, guid: a00c863600a71bf4cb1ffd752c55cc12, type: 3}
   HighJumpWindow: 0.1
@@ -99,6 +101,7 @@ MonoBehaviour:
   SpinAttackDamage: 1
   SpinAttackCost: 0.25
   SpinAttackTime: 0.5
+  SpinAttackGravity: 5
   SpinAttackCooldown: 0.1
   PounceAttackDamage: 4
   PounceAttackCost: 0.25
@@ -108,8 +111,9 @@ MonoBehaviour:
   PounceJumpHeight: 1.25
   PounceJumpTime: 0.5
   PostDamageInvincibilityTime: 1
-  DamageJumpHeight: 1.25
-  DamageJumpTime: 0.5
+  DamageJumpEffect: {fileID: 8295572130690841561, guid: 493960a1e62d62f4491c252e8132941d, type: 3}
+  DamageJumpHeight: 0.75
+  DamageJumpTime: 0.1875
   DamageFromFallingBoxes: 1
   DamageFromWater: 1
   CollectableDelay: 0.1

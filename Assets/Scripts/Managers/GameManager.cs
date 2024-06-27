@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
         _cinemachineBrain = Camera.main.GetComponent<Cinemachine.CinemachineBrain>();
         _isRespawning = false;
 
-        _playerStatusObject.MaxHitPoints = 3;/////////////////////////remove///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        _playerStatusObject.MaxHitPoints = 5;/////////////////////////remove///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //set game status object
         SetGameStatus();
 
@@ -71,7 +71,7 @@ public class GameManager : Singleton<GameManager>
     private void SetGameStatus()
     {
         //TODO: set based on save data///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        _gameStatusObject.unlockedDart = false;
+        _gameStatusObject.unlockedDart = true;
         _gameStatusObject.unlockedClimb = false;
         _gameStatusObject.unlockedLiquidCat = false;
         _gameStatusObject.unlockedChonkMode = false;
@@ -96,6 +96,7 @@ public class GameManager : Singleton<GameManager>
 
         _playerStatusObject.HasGeneralJumpToken = true;
         _playerStatusObject.IsJumping = false;
+        _playerStatusObject.TriggerDamageJumping = false;
         _playerStatusObject.IsDamageJumping = false;
         _playerStatusObject.HasHighJumpToken = false;
         _playerStatusObject.IsHighJumping = false;
@@ -134,7 +135,14 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(DamageRespawnFadeOutTime);
 
         //teleport to minor checkpoint & zero velocity
-        _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMinorCheckpoint.transform.position;
+        if (_playerStatusObject.CurrentMinorCheckpoint != null)
+        {
+            _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMinorCheckpoint.transform.position;
+        }
+        else
+        {
+            _playerStatusObject.Player.transform.position = _playerStatusObject.CurrentMajorCheckpoint.transform.position;
+        }
         _playerStatusObject.Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         //reset camera

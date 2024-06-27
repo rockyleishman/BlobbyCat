@@ -1,0 +1,1 @@
+public class NoSFXFoundException : System.Exception { }

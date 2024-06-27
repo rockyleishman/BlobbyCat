@@ -25,6 +25,8 @@ public class PlayerMovementController : MonoBehaviour
     private float _jumpTimer;
     private float _jumpCooldownTimer;
 
+    private Coroutine _damageJumpCoroutine;
+
     private bool _isConflictingInputEnabled;
 
     private float _runningJumpTime;
@@ -82,10 +84,7 @@ public class PlayerMovementController : MonoBehaviour
         _dartTimer -= Time.deltaTime;
 
         //jump movement
-        if (!_playerStatusObject.IsSlamAttacking)
-        {
-            Jump();
-        }
+        Jump();
 
         //apply gravity
         Gravity();
@@ -363,6 +362,9 @@ public class PlayerMovementController : MonoBehaviour
         DoubleJump();
         TripleJump();
 
+        //damage jump
+        DamageJump();
+
         //allow new pounce jumps if not currently pounce attacking
         if (!_playerStatusObject.IsPounceAttacking)
         {
@@ -382,6 +384,9 @@ public class PlayerMovementController : MonoBehaviour
             _playerStatusObject.HasDoubleJumpToken = true;
             _jumpTimer = 0.0f;
             _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
+            
+            //play SFX
+            AudioManager.Instance.PlaySFX("PlayerHighJumpSFX");
 
             //play effect
             if (_playerValuesObject.SingleJumpEffect != null)
@@ -432,11 +437,17 @@ public class PlayerMovementController : MonoBehaviour
             {
                 _runningJumpHeight = _playerValuesObject.SingleJumpHeight;
                 _runningJumpTime = _playerValuesObject.SingleJumpTime;
+
+                //play SFX
+                AudioManager.Instance.PlaySFX("PlayerSingleJumpSFX");
             }            
             else if (Mathf.Abs(_velocity.x) >= _playerValuesObject.GroundRunMovementSpeed)
             {
                 _runningJumpHeight = _playerValuesObject.HighJumpHeight;
                 _runningJumpTime = _playerValuesObject.HighJumpTime;
+
+                //play SFX
+                AudioManager.Instance.PlaySFX("PlayerHighJumpSFX");
 
                 //play extra effect
                 if (_playerValuesObject.HighJumpEffect != null)
@@ -448,6 +459,9 @@ public class PlayerMovementController : MonoBehaviour
             {
                 _runningJumpHeight = Mathf.Lerp(_playerValuesObject.SingleJumpHeight, _playerValuesObject.HighJumpHeight * 0.8f, (Mathf.Abs(_velocity.x) - _playerValuesObject.GroundMovementSpeed) / (_playerValuesObject.GroundRunMovementSpeed - _playerValuesObject.GroundMovementSpeed));
                 _runningJumpTime = Mathf.Lerp(_playerValuesObject.SingleJumpTime, _playerValuesObject.HighJumpTime * 0.8f, (Mathf.Abs(_velocity.x) - _playerValuesObject.GroundMovementSpeed) / (_playerValuesObject.GroundRunMovementSpeed - _playerValuesObject.GroundMovementSpeed));
+
+                //play SFX
+                AudioManager.Instance.PlaySFX("PlayerSingleJumpSFX");
             }
         }
 
@@ -479,6 +493,10 @@ public class PlayerMovementController : MonoBehaviour
             _playerStatusObject.IsJumping = true;
             _playerStatusObject.IsSingleJumping = false;
             _playerStatusObject.IsDoubleJumping = true;
+            if (_damageJumpCoroutine != null)
+            {
+                StopCoroutine(_damageJumpCoroutine);
+            }
             _playerStatusObject.HasGeneralJumpToken = false;
             _playerStatusObject.HasDoubleJumpToken = false;
             _jumpTimer = 0.0f;
@@ -578,6 +596,46 @@ public class PlayerMovementController : MonoBehaviour
             //end of jump
             _playerStatusObject.IsJumping = false;
         }
+    }
+
+    private void DamageJump()
+    {
+        if (!_playerStatusObject.IsDamageJumping && _playerStatusObject.TriggerDamageJumping)
+        {
+            //start jump
+            _playerStatusObject.IsJumping = true;
+            _playerStatusObject.IsSingleJumping = false;
+            _playerStatusObject.IsDoubleJumping = false;
+            _playerStatusObject.IsTripleJumping = false;
+            _playerStatusObject.IsPounceJumping = false;
+            _playerStatusObject.IsDamageJumping = true;
+            _playerStatusObject.HasSingleJumpToken = false;
+            _playerStatusObject.HasDoubleJumpToken = true;
+            _jumpTimer = 0.0f;
+            _jumpCooldownTimer = _playerValuesObject.JumpCooldown;
+
+            //play effect
+            if (_playerValuesObject.DamageJumpEffect != null)
+            {
+                PoolManager.Instance.Spawn(_playerValuesObject.DamageJumpEffect.name, transform.position, transform.rotation);
+            }
+        }
+
+        //prevent queued damage jumping
+        _playerStatusObject.TriggerDamageJumping = false;
+
+        if (_playerStatusObject.IsDamageJumping && _jumpTimer < _playerValuesObject.DamageJumpTime)
+        {
+            //jumping
+            _velocity.y = _playerValuesObject.DamageJumpHeight * Mathf.PI / 2.0f / _playerValuesObject.DamageJumpTime * Mathf.Sin(Mathf.Lerp(Mathf.PI / 2.0f, Mathf.PI, _jumpTimer / _playerValuesObject.DamageJumpTime));
+            _jumpTimer += Time.deltaTime;
+        }
+        else
+        {
+            //end of jump
+            _playerStatusObject.IsDamageJumping = false;
+            _playerStatusObject.IsJumping = false;
+        }        
     }
 
     private void Gravity()
@@ -775,6 +833,9 @@ public class PlayerMovementController : MonoBehaviour
 
             //update velocity
             _rigidbody.velocity = new Vector2(boostedVelocity, verticalVelocity);
+
+            //play SFX
+            AudioManager.Instance.PlaySFX("PlayerDartSFX");
 
             //play effect
             if (boostedVelocity >= _playerValuesObject.GroundDartMaximumSpeed && _playerValuesObject.DartSuperFastEffect != null)

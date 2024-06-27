@@ -81,8 +81,11 @@ public class PlayerHitPointController : MonoBehaviour, IHitPointController
             //update HUD
             HUDManager.Instance.UpdateHP();
 
-            //TODO: animate damage////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //animate damage
+            _animator.SetTrigger("Hurt");
 
+            //damage jump
+            _playerStatusObject.TriggerDamageJumping = true;
 
             //heal if full sub hit points
             CheckSubHeal();

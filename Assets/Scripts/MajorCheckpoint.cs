@@ -8,7 +8,6 @@ public class MajorCheckpoint : MinorCheckpoint
         if (player != null)
         {
             DataManager.Instance.PlayerStatusObject.CurrentMajorCheckpoint = this;
-            DataManager.Instance.PlayerStatusObject.CurrentMinorCheckpoint = this;
         }
     }
 }

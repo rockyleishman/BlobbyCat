@@ -57,5 +57,6 @@ public class PlayerStatus : ScriptableObject
 
     internal bool IsPounceJumping = false;
 
+    internal bool TriggerDamageJumping = false;
     internal bool IsDamageJumping = false;
 }

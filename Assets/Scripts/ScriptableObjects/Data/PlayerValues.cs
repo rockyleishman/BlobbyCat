@@ -94,6 +94,7 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float AlmostGroundDetectionRange = 0.75f;
     [SerializeField] public float Hangtime = 0.1f;
     [SerializeField] public float GroundedGravity = 10.0f;
+    [SerializeField] public float WallBumpDistance = 0.0625f;
 
     [Header("Jump")]
     [SerializeField] public float JumpCooldown = 0.25f;
@@ -147,8 +148,9 @@ public class PlayerValues : ScriptableObject
 
     [Header("Damage")]
     [SerializeField] public float PostDamageInvincibilityTime = 1.0f;
-    [SerializeField] public float DamageJumpHeight = 1.25f;
-    [SerializeField] public float DamageJumpTime = 0.5f;
+    [SerializeField] public Effect DamageJumpEffect;
+    [SerializeField] public float DamageJumpHeight = 0.75f;
+    [SerializeField] public float DamageJumpTime = 0.125f;
     [Space(10.0f)]
     [SerializeField] public int DamageFromFallingBoxes = 1;
     [SerializeField] public int DamageFromWater = 1;
