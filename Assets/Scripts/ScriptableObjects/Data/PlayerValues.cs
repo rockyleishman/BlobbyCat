@@ -159,4 +159,5 @@ public class PlayerValues : ScriptableObject
     [SerializeField] public float CollectableDelay = 0.05f;
     [SerializeField] public float CollectableSuction = 0.1f;
     [SerializeField] public float CollectableMaxSpeed = 20.0f;
+    [SerializeField] public float YarnDamageVelocityMultiplier = 1.0f;
 }

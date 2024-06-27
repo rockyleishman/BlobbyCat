@@ -56,6 +56,29 @@ public class PlayerAttackHitbox : MonoBehaviour
             }
         }
 
-        //TODO: stun
+        //roll yarn
+        YarnBall yarnBall = collider.GetComponent<YarnBall>();
+        if (yarnBall != null)
+        {
+            if (_playerStatusObject.IsSlapAttacking)
+            {
+                yarnBall.AttackHit(transform.position, _playerValuesObject.SlapAttackDamage * _playerValuesObject.YarnDamageVelocityMultiplier);
+            }
+            else if (_playerStatusObject.IsSlamAttacking)
+            {
+                yarnBall.AttackHit(transform.position, _playerValuesObject.SlamAttackDamage * _playerValuesObject.YarnDamageVelocityMultiplier);
+            }
+            else if (_playerStatusObject.IsSpinAttacking)
+            {
+                yarnBall.AttackHit(transform.position, _playerValuesObject.SpinAttackDamage * _playerValuesObject.YarnDamageVelocityMultiplier);
+            }
+            if (_playerStatusObject.IsPounceAttacking)
+            {
+                yarnBall.AttackHit(transform.position, _playerValuesObject.PounceAttackDamage * _playerValuesObject.YarnDamageVelocityMultiplier);
+            }
+        }
+
+        //TODO: knockback
+
     }
 }

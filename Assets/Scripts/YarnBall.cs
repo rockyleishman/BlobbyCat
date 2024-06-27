@@ -134,6 +134,7 @@ public class YarnBall : MonoBehaviour
             _animator.SetInteger("Stage", 1);
         }
     }
+
     private void Collect()
     {
         //effects
@@ -141,5 +142,19 @@ public class YarnBall : MonoBehaviour
 
         //TODO: collect via manager
         Destroy(gameObject);
+    }
+
+    public void AttackHit(Vector3 attackPosition, float deltaSpeed)
+    {
+        if (transform.position.x - attackPosition.x > 0.0f)
+        {
+            //roll right
+            _rigidbody.velocity += new Vector2(deltaSpeed, 0.0f);
+        }
+        else
+        {
+            //roll left
+            _rigidbody.velocity += new Vector2(-deltaSpeed, 0.0f);
+        }
     }
 }

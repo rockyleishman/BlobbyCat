@@ -49,6 +49,9 @@ public class AIController : MonoBehaviour
     [SerializeField] public float AggroSpeed = 4.0f;
     [SerializeField] public float StunRecoveryMultiplier = 1.0f;
     private float _stunTime;
+    [SerializeField] public float KnockbackDistance;
+    [SerializeField] public float KnockbackSpeed;
+    private bool _isBeingKnockedBack;
     [SerializeField] public bool CanJump = false;
     [SerializeField] public bool StartFacingRight = true;
     [SerializeField] public WallDetector LeftWallDetector;
@@ -90,6 +93,7 @@ public class AIController : MonoBehaviour
         _attackTriggers = GetComponentsInChildren<AttackTrigger>();
         _currentState = AIState.Idle;
         _stunTime = 0.0f;
+        _isBeingKnockedBack = false;
         _renderer.flipX = !StartFacingRight;
         _roamSpeed = MovementSpeed;
         _roamTimer = 0.0f;
@@ -211,8 +215,15 @@ public class AIController : MonoBehaviour
             attackTrigger.gameObject.SetActive(false);
         }
 
-        //stun idle
-        _rigidbody.velocity = Vector2.zero;
+        //stun idle/knockback
+        if (_isBeingKnockedBack)
+        {
+            StartCoroutine(OnKnockback());
+        }
+        else
+        {
+            _rigidbody.velocity = Vector2.zero;
+        }
         yield return new WaitForSeconds(_stunTime);
 
         //enable attached attack triggers
@@ -234,6 +245,29 @@ public class AIController : MonoBehaviour
             //patrol
             SetState(AIState.Patrol);
         }
+    }
+
+    private IEnumerator OnKnockback()
+    {
+        float knockbackTime = KnockbackDistance / KnockbackSpeed;
+        int direction;
+        if (transform.position.x >= DataManager.Instance.PlayerStatusObject.Player.transform.position.x)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = -1;
+        }
+
+        while (knockbackTime > 0.0f)
+        {
+            knockbackTime -= Time.deltaTime;
+            _rigidbody.velocity = new Vector2(KnockbackSpeed * direction, 0.0f);
+            yield return null;
+        }
+
+        _rigidbody.velocity = Vector2.zero;
     }
 
     private IEnumerator OnRoam()
@@ -362,12 +396,14 @@ public class AIController : MonoBehaviour
     public void Hurt(float time)
     {
         _stunTime = time;
+        _isBeingKnockedBack = true;
         SetState(AIState.Stunned);
     }
 
     public void Stun(float time)
     {
         _stunTime = time / StunRecoveryMultiplier;
+        _isBeingKnockedBack = false;
         SetState(AIState.Stunned);
     }
 
