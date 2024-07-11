@@ -729,7 +729,10 @@ public class PlayerMovementController : MonoBehaviour
         _animator.SetBool("IsCrouching", _playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded);
 
         //is sliding
-        _animator.SetBool("IsSliding", _runInput && _playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded);        
+        _animator.SetBool("IsSliding", _runInput && _playerStatusObject.IsCrouching && _playerStatusObject.IsGrounded);
+
+        //is liquid
+        _animator.SetBool("IsLiquid", _playerStatusObject.IsLiquid);
     }
 
     private void OnMovement(InputValue value)
@@ -755,7 +758,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        if (_isConflictingInputEnabled)
+        if (_isConflictingInputEnabled && !_playerStatusObject.IsLiquid)
         {
             _jumpInput = value.Get<float>() != 0.0f;
         }
@@ -763,7 +766,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void OnDart()
     {
-        if (_gameStatusObject.unlockedDart && _playerStatusObject.HasDartToken && _isConflictingInputEnabled)
+        if (_gameStatusObject.unlockedDart && _playerStatusObject.HasDartToken && _isConflictingInputEnabled && !_playerStatusObject.IsLiquid)
         {
             //calculate horizontal velocity
             float boostedVelocity;

@@ -27,6 +27,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float DeathRespawnFadeOutTime = 1.0f;
     [SerializeField] public float DeathRespawnOutTime = 0.5f;
     [SerializeField] public float DeathRespawnFadeInTime = 1.0f;
+    [SerializeField] public LiquidCatPipe LiquidCatPipePrefab;
+    [SerializeField] public float LiquidCatPipeInAnimationTime = 1.833333f;
+    [SerializeField] public float LiquidCatPipeTeleportInTime = 0.125f;
+    [SerializeField] public float LiquidCatPipeTeleportFadeOutTime = 0.125f;
+    [SerializeField] public float LiquidCatPipeTeleportOutTime = 0.125f;
+    [SerializeField] public float LiquidCatPipeTeleportFadeInTime = 0.125f;
+    [SerializeField] public float LiquidCatPipeOutAnimationTime = 1.0f;
 
     private bool _isRespawning;
 
@@ -73,7 +80,7 @@ public class GameManager : Singleton<GameManager>
         //TODO: set based on save data///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         _gameStatusObject.unlockedDart = true;
         _gameStatusObject.unlockedClimb = false;
-        _gameStatusObject.unlockedLiquidCat = false;
+        _gameStatusObject.unlockedLiquidCat = true;
         _gameStatusObject.unlockedChonkMode = false;
         _gameStatusObject.unlockedDoubleJump = false;
     }
@@ -224,6 +231,74 @@ public class GameManager : Singleton<GameManager>
 
         //TODO: respawn effects////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        _isRespawning = false;
+    }
+
+    public void LiquidCatPipeTeleport(InPipeController inPipe)
+    {
+        if (!_isRespawning)
+        {
+            StartCoroutine(LiquidCatPipeTeleportCoroutine(inPipe));
+        }
+    }
+
+    private IEnumerator LiquidCatPipeTeleportCoroutine(InPipeController inPipe)
+    {
+        _isRespawning = true;
+
+        //spawn liquid cat
+        LiquidCatPipe liquidCat = (LiquidCatPipe)PoolManager.Instance.Spawn(LiquidCatPipePrefab.name, inPipe.transform.position, inPipe.transform.rotation);
+
+        //orient liquid cat
+        liquidCat.GetComponent<SpriteRenderer>().flipX = !_playerStatusObject.IsFacingRight;
+
+        //play liquid cat in animation
+        liquidCat.PlayIn();
+
+        //parent player to liquid cat
+        _playerStatusObject.Player.transform.SetParent(liquidCat.transform);
+        _playerStatusObject.Player.transform.localPosition = Vector3.zero;
+
+        //disable and hide player
+        _playerStatusObject.Player.gameObject.SetActive(false);
+        _playerStatusObject.Player.GetComponent<Renderer>().enabled = false;
+
+        //in time
+        yield return new WaitForSeconds(LiquidCatPipeInAnimationTime);
+        yield return new WaitForSeconds(LiquidCatPipeTeleportInTime);
+
+        //fade out time
+        FadeManager.Instance.FadeOut(LevelFadeColour, LiquidCatPipeTeleportFadeOutTime);
+        yield return new WaitForSeconds(LiquidCatPipeTeleportFadeOutTime);
+
+        //teleport to out location & zero velocity
+        liquidCat.transform.position = inPipe.OutPipe.transform.position;
+        _playerStatusObject.Player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        
+        //reset camera
+        _cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().ForceCameraPosition(new Vector3(_playerStatusObject.Player.transform.position.x, _playerStatusObject.Player.transform.position.y, Camera.main.transform.position.z), Camera.main.transform.rotation);
+
+        //out time
+        yield return new WaitForSeconds(LiquidCatPipeTeleportOutTime);
+
+        //rereset camera
+        _cinemachineBrain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineVirtualCamera>().ForceCameraPosition(new Vector3(_playerStatusObject.Player.transform.position.x, _playerStatusObject.Player.transform.position.y, Camera.main.transform.position.z), Camera.main.transform.rotation);
+        
+        //fade in time
+        FadeManager.Instance.FadeIn(LevelFadeColour, DeathRespawnFadeInTime);
+        yield return new WaitForSeconds(LiquidCatPipeTeleportFadeInTime);
+
+        //play liquid cat out animation
+        liquidCat.PlayOut();
+        yield return new WaitForSeconds(LiquidCatPipeOutAnimationTime);
+
+        //player is liquid until grounded
+        _playerStatusObject.IsLiquid = true;
+
+        //enable player
+        _playerStatusObject.Player.GetComponent<Renderer>().enabled = true;
+        _playerStatusObject.Player.gameObject.SetActive(true);
+        
         _isRespawning = false;
     }
 

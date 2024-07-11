@@ -7,8 +7,6 @@ public class PlayerGroundDetector : MonoBehaviour
     private PlayerValues _playerValuesObject;
     private PlayerStatus _playerStatusObject;
 
-    private Rigidbody2D _rigidbody;
-
     private float _hangtimer;
     private float _groundedTimer;
 
@@ -20,7 +18,6 @@ public class PlayerGroundDetector : MonoBehaviour
         //init fields
         _playerValuesObject = DataManager.Instance.PlayerValuesObject;
         _playerStatusObject = DataManager.Instance.PlayerStatusObject;
-        _rigidbody = _playerStatusObject.Player.GetComponent<Rigidbody2D>();
         _hangtimer = 0.0f;
         _groundedTimer = 0.0f;
         _playerRadii = _playerStatusObject.Player.GetComponent<CapsuleCollider2D>().size.y / 2.0f;
@@ -50,6 +47,17 @@ public class PlayerGroundDetector : MonoBehaviour
             _playerStatusObject.HasHighJumpToken = true;
             _playerStatusObject.HasDoubleJumpToken = false;
             _playerStatusObject.HasDartToken = true;
+
+            //if liquid, play special effect and cancel liquid
+            if (_playerStatusObject.IsLiquid)
+            {
+                _playerStatusObject.IsLiquid = false;
+
+                if (_playerValuesObject.LiquidLandEffect != null)
+                {
+                    PoolManager.Instance.Spawn(_playerValuesObject.LiquidLandEffect.name, transform.position, transform.rotation);
+                }
+            }
 
             //play effect
             if (_playerValuesObject.LandEffect != null)

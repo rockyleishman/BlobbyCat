@@ -19,6 +19,9 @@ public class PlayerStatus : ScriptableObject
 
     //ORIENTATION
     internal bool IsFacingRight = true;
+
+    //LIQUID
+    internal bool IsLiquid = false;
     
     //GROUND
     internal bool IsGrounded = false;

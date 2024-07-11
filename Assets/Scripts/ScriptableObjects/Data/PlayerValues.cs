@@ -89,6 +89,7 @@ public class PlayerValues : ScriptableObject
 
     [Header("Ground")]
     [SerializeField] public Effect LandEffect;
+    [SerializeField] public Effect LiquidLandEffect;
     [Space(10.0f)]
     [SerializeField] public float GroundDetectionRange = 0.0625f;
     [SerializeField] public float AlmostGroundDetectionRange = 0.75f;
